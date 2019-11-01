@@ -29,7 +29,8 @@ build/main.o: Src/main.c Inc/main.h \
  Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim_ex.h \
  Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart.h \
  Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_uart_ex.h Inc/adc.h \
- Inc/i2c.h Inc/spi.h Inc/tim.h Inc/usart.h Inc/gpio.h
+ Inc/i2c.h Inc/spi.h Inc/tim.h Inc/usart.h Inc/gpio.h Inc/ssd1306.h \
+ Inc/fonts.h
 
 Inc/main.h:
 
@@ -108,3 +109,7 @@ Inc/tim.h:
 Inc/usart.h:
 
 Inc/gpio.h:
+
+Inc/ssd1306.h:
+
+Inc/fonts.h:

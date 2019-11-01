@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccztG7uS.s 			page 1
+ARM GAS  /tmp/ccIxLtvw.s 			page 1
 
 
    1              		.cpu cortex-m0plus
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccztG7uS.s 			page 1
   31:Src/stm32l0xx_it.c ****   ******************************************************************************
   32:Src/stm32l0xx_it.c ****   */
   33:Src/stm32l0xx_it.c **** /* Includes ------------------------------------------------------------------*/
-ARM GAS  /tmp/ccztG7uS.s 			page 2
+ARM GAS  /tmp/ccIxLtvw.s 			page 2
 
 
   34:Src/stm32l0xx_it.c **** #include "stm32l0xx_hal.h"
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccztG7uS.s 			page 1
   71:Src/stm32l0xx_it.c ****   /* USER CODE END HardFault_IRQn 0 */
   72:Src/stm32l0xx_it.c ****   while (1)
   73:Src/stm32l0xx_it.c ****   {
-ARM GAS  /tmp/ccztG7uS.s 			page 3
+ARM GAS  /tmp/ccIxLtvw.s 			page 3
 
 
   74:Src/stm32l0xx_it.c ****     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccztG7uS.s 			page 1
  101:Src/stm32l0xx_it.c **** 
  102:Src/stm32l0xx_it.c ****   /* USER CODE END PendSV_IRQn 0 */
  103:Src/stm32l0xx_it.c ****   /* USER CODE BEGIN PendSV_IRQn 1 */
-ARM GAS  /tmp/ccztG7uS.s 			page 4
+ARM GAS  /tmp/ccIxLtvw.s 			page 4
 
 
  104:Src/stm32l0xx_it.c **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccztG7uS.s 			page 1
  116              	.LFB41:
  122:Src/stm32l0xx_it.c **** 
  123:Src/stm32l0xx_it.c **** /******************************************************************************/
-ARM GAS  /tmp/ccztG7uS.s 			page 5
+ARM GAS  /tmp/ccIxLtvw.s 			page 5
 
 
  124:Src/stm32l0xx_it.c **** /* STM32L0xx Peripheral Interrupt Handlers                                    */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccztG7uS.s 			page 1
  148 0000 08B5     		push	{r3, lr}
  149              	.LCFI2:
  150              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/ccztG7uS.s 			page 6
+ARM GAS  /tmp/ccIxLtvw.s 			page 6
 
 
  151              		.cfi_offset 3, -8
@@ -332,109 +332,637 @@ ARM GAS  /tmp/ccztG7uS.s 			page 1
  173              	TIM21_IRQHandler:
  174              	.LFB43:
  157:Src/stm32l0xx_it.c **** 
- 158:Src/stm32l0xx_it.c **** /**
- 159:Src/stm32l0xx_it.c **** * @brief This function handles TIM21 global interrupt.
- 160:Src/stm32l0xx_it.c **** */
- 161:Src/stm32l0xx_it.c **** void TIM21_IRQHandler(void)
- 162:Src/stm32l0xx_it.c **** {
- 175              		.loc 1 162 0
- 176              		.cfi_startproc
- 177 0000 08B5     		push	{r3, lr}
- 178              	.LCFI3:
- 179              		.cfi_def_cfa_offset 8
- 180              		.cfi_offset 3, -8
- 181              		.cfi_offset 14, -4
- 163:Src/stm32l0xx_it.c ****   /* USER CODE BEGIN TIM21_IRQn 0 */
- 164:Src/stm32l0xx_it.c **** 
- 165:Src/stm32l0xx_it.c ****   /* USER CODE END TIM21_IRQn 0 */
- 166:Src/stm32l0xx_it.c ****   HAL_TIM_IRQHandler(&htim21);
- 182              		.loc 1 166 0
- 183 0002 0248     		ldr	r0, .L14
- 184 0004 FFF7FEFF 		bl	HAL_TIM_IRQHandler
- 185              	.LVL4:
- 167:Src/stm32l0xx_it.c ****   /* USER CODE BEGIN TIM21_IRQn 1 */
- 168:Src/stm32l0xx_it.c **** 
- 169:Src/stm32l0xx_it.c ****   /* USER CODE END TIM21_IRQn 1 */
- 170:Src/stm32l0xx_it.c **** }
- 186              		.loc 1 170 0
- 187              		@ sp needed
-ARM GAS  /tmp/ccztG7uS.s 			page 7
-
-
- 188 0008 08BD     		pop	{r3, pc}
- 189              	.L15:
- 190 000a C046     		.align	2
- 191              	.L14:
- 192 000c 00000000 		.word	htim21
- 193              		.cfi_endproc
- 194              	.LFE43:
- 196              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
- 197              		.align	2
- 198              		.global	HAL_TIM_PeriodElapsedCallback
- 199              		.code	16
- 200              		.thumb_func
- 202              	HAL_TIM_PeriodElapsedCallback:
- 203              	.LFB44:
+ 158:Src/stm32l0xx_it.c **** 
+ 159:Src/stm32l0xx_it.c **** 
+ 160:Src/stm32l0xx_it.c **** 
+ 161:Src/stm32l0xx_it.c **** 
+ 162:Src/stm32l0xx_it.c **** extern int usec_timer_flag;
+ 163:Src/stm32l0xx_it.c **** 
+ 164:Src/stm32l0xx_it.c **** extern  int automat_state;
+ 165:Src/stm32l0xx_it.c **** extern int odd_even;
+ 166:Src/stm32l0xx_it.c **** 
+ 167:Src/stm32l0xx_it.c **** extern int charge_packet_counter;
+ 168:Src/stm32l0xx_it.c **** extern int positive_impulse_counter;
+ 169:Src/stm32l0xx_it.c **** extern int negative_impulse_counter;
+ 170:Src/stm32l0xx_it.c **** extern int discharge_counter;
  171:Src/stm32l0xx_it.c **** 
- 172:Src/stm32l0xx_it.c **** extern int usec_timer_flag;
- 173:Src/stm32l0xx_it.c **** void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
- 174:Src/stm32l0xx_it.c **** {
- 204              		.loc 1 174 0
- 205              		.cfi_startproc
- 206              	.LVL5:
- 175:Src/stm32l0xx_it.c **** 	// set flag
- 176:Src/stm32l0xx_it.c **** 	usec_timer_flag = 1;
- 207              		.loc 1 176 0
- 208 0000 0122     		mov	r2, #1
- 209 0002 014B     		ldr	r3, .L17
- 210 0004 1A60     		str	r2, [r3]
- 177:Src/stm32l0xx_it.c **** }
- 211              		.loc 1 177 0
- 212              		@ sp needed
- 213 0006 7047     		bx	lr
- 214              	.L18:
- 215              		.align	2
- 216              	.L17:
- 217 0008 00000000 		.word	usec_timer_flag
- 218              		.cfi_endproc
- 219              	.LFE44:
- 221              		.text
- 222              	.Letext0:
- 223              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 224              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 225              		.file 4 "Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l051xx.h"
- 226              		.file 5 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h"
- 227              		.file 6 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h"
- 228              		.file 7 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h"
- 229              		.file 8 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h"
- 230              		.file 9 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h"
-ARM GAS  /tmp/ccztG7uS.s 			page 8
+ 172:Src/stm32l0xx_it.c **** extern uint32_t delay_counter;
+ 173:Src/stm32l0xx_it.c **** extern uint32_t chock_length_counter;
+ 174:Src/stm32l0xx_it.c **** 
+ 175:Src/stm32l0xx_it.c **** 
+ 176:Src/stm32l0xx_it.c **** extern int DELAY_1_MS;
+ 177:Src/stm32l0xx_it.c **** extern int NUMBER_OF_CHARGE_PULSES;
+ 178:Src/stm32l0xx_it.c **** extern int DELAY_LENGTH; 
+ 179:Src/stm32l0xx_it.c **** extern int CHOCK_LENGTH;
+ 180:Src/stm32l0xx_it.c **** extern int DISCARGE_IMPULSE_LENGTH;
+ 181:Src/stm32l0xx_it.c **** 
+ 182:Src/stm32l0xx_it.c **** extern int usart_string_received_flag;
+ 183:Src/stm32l0xx_it.c **** 
+ARM GAS  /tmp/ccIxLtvw.s 			page 7
+
+
+ 184:Src/stm32l0xx_it.c **** /**
+ 185:Src/stm32l0xx_it.c **** * @brief This function handles TIM21 global interrupt.
+ 186:Src/stm32l0xx_it.c **** */
+ 187:Src/stm32l0xx_it.c **** void TIM21_IRQHandler(void)
+ 188:Src/stm32l0xx_it.c **** {
+ 175              		.loc 1 188 0
+ 176              		.cfi_startproc
+ 189:Src/stm32l0xx_it.c **** 	// clear it
+ 190:Src/stm32l0xx_it.c **** 	(&htim21)->Instance->SR = ~TIM_IT_UPDATE;
+ 177              		.loc 1 190 0
+ 178 0000 5D4B     		ldr	r3, .L28
+ 179 0002 1B68     		ldr	r3, [r3]
+ 180 0004 0222     		mov	r2, #2
+ 181 0006 5242     		neg	r2, r2
+ 182 0008 1A61     		str	r2, [r3, #16]
+ 191:Src/stm32l0xx_it.c **** 
+ 192:Src/stm32l0xx_it.c **** 	if(automat_state == 1)
+ 183              		.loc 1 192 0
+ 184 000a 5C4B     		ldr	r3, .L28+4
+ 185 000c 1B68     		ldr	r3, [r3]
+ 186 000e 012B     		cmp	r3, #1
+ 187 0010 26D1     		bne	.L14
+ 193:Src/stm32l0xx_it.c **** 	{
+ 194:Src/stm32l0xx_it.c **** 		if(odd_even)
+ 188              		.loc 1 194 0
+ 189 0012 5B4B     		ldr	r3, .L28+8
+ 190 0014 1B68     		ldr	r3, [r3]
+ 191 0016 002B     		cmp	r3, #0
+ 192 0018 03D0     		beq	.L15
+ 195:Src/stm32l0xx_it.c **** 		{
+ 196:Src/stm32l0xx_it.c **** 			charge_packet_counter++;
+ 193              		.loc 1 196 0
+ 194 001a 5A49     		ldr	r1, .L28+12
+ 195 001c 0A68     		ldr	r2, [r1]
+ 196 001e 0132     		add	r2, r2, #1
+ 197 0020 0A60     		str	r2, [r1]
+ 198              	.L15:
+ 197:Src/stm32l0xx_it.c **** 		}
+ 198:Src/stm32l0xx_it.c **** 		odd_even = (odd_even + 1) % 2;
+ 199              		.loc 1 198 0
+ 200 0022 0133     		add	r3, r3, #1
+ 201 0024 D90F     		lsr	r1, r3, #31
+ 202 0026 5A18     		add	r2, r3, r1
+ 203 0028 0123     		mov	r3, #1
+ 204 002a 1340     		and	r3, r2
+ 205 002c 5B1A     		sub	r3, r3, r1
+ 206 002e 544A     		ldr	r2, .L28+8
+ 207 0030 1360     		str	r3, [r2]
+ 199:Src/stm32l0xx_it.c **** 		usec_gen_out_GPIO_Port->ODR ^= usec_gen_out_Pin;// toggle usec generator pin
+ 208              		.loc 1 199 0
+ 209 0032 A022     		mov	r2, #160
+ 210 0034 D205     		lsl	r2, r2, #23
+ 211 0036 5369     		ldr	r3, [r2, #20]
+ 212 0038 8021     		mov	r1, #128
+ 213 003a 4900     		lsl	r1, r1, #1
+ 214 003c 4B40     		eor	r3, r1
+ 215 003e 5361     		str	r3, [r2, #20]
+ARM GAS  /tmp/ccIxLtvw.s 			page 8
+
+
+ 200:Src/stm32l0xx_it.c **** 
+ 201:Src/stm32l0xx_it.c **** 		if(charge_packet_counter >= NUMBER_OF_CHARGE_PULSES)
+ 216              		.loc 1 201 0
+ 217 0040 504B     		ldr	r3, .L28+12
+ 218 0042 1A68     		ldr	r2, [r3]
+ 219 0044 504B     		ldr	r3, .L28+16
+ 220 0046 1B68     		ldr	r3, [r3]
+ 221 0048 9A42     		cmp	r2, r3
+ 222 004a 00DA     		bge	.LCB147
+ 223 004c 82E0     		b	.L16	@long jump
+ 224              	.LCB147:
+ 202:Src/stm32l0xx_it.c **** 		{
+ 203:Src/stm32l0xx_it.c **** 			charge_packet_counter = 0;
+ 225              		.loc 1 203 0
+ 226 004e 0023     		mov	r3, #0
+ 227 0050 4C4A     		ldr	r2, .L28+12
+ 228 0052 1360     		str	r3, [r2]
+ 204:Src/stm32l0xx_it.c **** 			automat_state = 2;
+ 229              		.loc 1 204 0
+ 230 0054 FE39     		sub	r1, r1, #254
+ 231 0056 494A     		ldr	r2, .L28+4
+ 232 0058 1160     		str	r1, [r2]
+ 205:Src/stm32l0xx_it.c **** 			positive_impulse_counter = 0;
+ 233              		.loc 1 205 0
+ 234 005a 4C4A     		ldr	r2, .L28+20
+ 235 005c 1360     		str	r3, [r2]
+ 236 005e 79E0     		b	.L16
+ 237              	.L14:
+ 206:Src/stm32l0xx_it.c **** 		}
+ 207:Src/stm32l0xx_it.c **** 	}
+ 208:Src/stm32l0xx_it.c **** 	else if(automat_state == 2)
+ 238              		.loc 1 208 0
+ 239 0060 022B     		cmp	r3, #2
+ 240 0062 1ED1     		bne	.L17
+ 209:Src/stm32l0xx_it.c **** 	{
+ 210:Src/stm32l0xx_it.c **** 		if(positive_impulse_counter == 1)
+ 241              		.loc 1 210 0
+ 242 0064 494B     		ldr	r3, .L28+20
+ 243 0066 1B68     		ldr	r3, [r3]
+ 244 0068 012B     		cmp	r3, #1
+ 245 006a 04D1     		bne	.L18
+ 211:Src/stm32l0xx_it.c **** 		{
+ 212:Src/stm32l0xx_it.c **** 			// set f1 pin
+ 213:Src/stm32l0xx_it.c ****     		pos_pack_gen_out_GPIO_Port->BSRR = pos_pack_gen_out_Pin ;
+ 246              		.loc 1 213 0
+ 247 006c 8021     		mov	r1, #128
+ 248 006e 8900     		lsl	r1, r1, #2
+ 249 0070 A022     		mov	r2, #160
+ 250 0072 D205     		lsl	r2, r2, #23
+ 251 0074 9161     		str	r1, [r2, #24]
+ 252              	.L18:
+ 214:Src/stm32l0xx_it.c ****             
+ 215:Src/stm32l0xx_it.c **** 		}
+ 216:Src/stm32l0xx_it.c **** 		if(positive_impulse_counter >= DISCARGE_IMPULSE_LENGTH)
+ 253              		.loc 1 216 0
+ 254 0076 464A     		ldr	r2, .L28+24
+ 255 0078 1268     		ldr	r2, [r2]
+ARM GAS  /tmp/ccIxLtvw.s 			page 9
+
+
+ 256 007a 9342     		cmp	r3, r2
+ 257 007c 0DDB     		blt	.L19
+ 217:Src/stm32l0xx_it.c **** 		{
+ 218:Src/stm32l0xx_it.c **** 			// reset f1 pin
+ 219:Src/stm32l0xx_it.c ****     		pos_pack_gen_out_GPIO_Port->BRR = pos_pack_gen_out_Pin ;
+ 258              		.loc 1 219 0
+ 259 007e 8022     		mov	r2, #128
+ 260 0080 9200     		lsl	r2, r2, #2
+ 261 0082 A023     		mov	r3, #160
+ 262 0084 DB05     		lsl	r3, r3, #23
+ 263 0086 9A62     		str	r2, [r3, #40]
+ 220:Src/stm32l0xx_it.c **** 			positive_impulse_counter = 0;
+ 264              		.loc 1 220 0
+ 265 0088 0023     		mov	r3, #0
+ 266 008a 404A     		ldr	r2, .L28+20
+ 267 008c 1360     		str	r3, [r2]
+ 221:Src/stm32l0xx_it.c **** 			negative_impulse_counter = 0;
+ 268              		.loc 1 221 0
+ 269 008e 414A     		ldr	r2, .L28+28
+ 270 0090 1360     		str	r3, [r2]
+ 222:Src/stm32l0xx_it.c **** 			automat_state = 3;
+ 271              		.loc 1 222 0
+ 272 0092 0322     		mov	r2, #3
+ 273 0094 394B     		ldr	r3, .L28+4
+ 274 0096 1A60     		str	r2, [r3]
+ 275 0098 5CE0     		b	.L16
+ 276              	.L19:
+ 223:Src/stm32l0xx_it.c ****             
+ 224:Src/stm32l0xx_it.c **** 		}
+ 225:Src/stm32l0xx_it.c **** 		else
+ 226:Src/stm32l0xx_it.c **** 		{
+ 227:Src/stm32l0xx_it.c **** 			//increment counter
+ 228:Src/stm32l0xx_it.c **** 			positive_impulse_counter++;
+ 277              		.loc 1 228 0
+ 278 009a 0133     		add	r3, r3, #1
+ 279 009c 3B4A     		ldr	r2, .L28+20
+ 280 009e 1360     		str	r3, [r2]
+ 281 00a0 58E0     		b	.L16
+ 282              	.L17:
+ 229:Src/stm32l0xx_it.c **** 		}
+ 230:Src/stm32l0xx_it.c **** 	}
+ 231:Src/stm32l0xx_it.c **** 	else if(automat_state == 3)
+ 283              		.loc 1 231 0
+ 284 00a2 032B     		cmp	r3, #3
+ 285 00a4 1ED1     		bne	.L20
+ 232:Src/stm32l0xx_it.c **** 	{
+ 233:Src/stm32l0xx_it.c **** 		if(negative_impulse_counter == 1)
+ 286              		.loc 1 233 0
+ 287 00a6 3B4B     		ldr	r3, .L28+28
+ 288 00a8 1B68     		ldr	r3, [r3]
+ 289 00aa 012B     		cmp	r3, #1
+ 290 00ac 04D1     		bne	.L21
+ 234:Src/stm32l0xx_it.c **** 		{
+ 235:Src/stm32l0xx_it.c **** 			// set f2 pin
+ 236:Src/stm32l0xx_it.c ****     		neg_pack_gen_out_GPIO_Port->BSRR = neg_pack_gen_out_Pin ;
+ 291              		.loc 1 236 0
+ 292 00ae 8021     		mov	r1, #128
+ARM GAS  /tmp/ccIxLtvw.s 			page 10
+
+
+ 293 00b0 C900     		lsl	r1, r1, #3
+ 294 00b2 A022     		mov	r2, #160
+ 295 00b4 D205     		lsl	r2, r2, #23
+ 296 00b6 9161     		str	r1, [r2, #24]
+ 297              	.L21:
+ 237:Src/stm32l0xx_it.c ****             
+ 238:Src/stm32l0xx_it.c **** 		}
+ 239:Src/stm32l0xx_it.c **** 		if(negative_impulse_counter >= DISCARGE_IMPULSE_LENGTH)
+ 298              		.loc 1 239 0
+ 299 00b8 354A     		ldr	r2, .L28+24
+ 300 00ba 1268     		ldr	r2, [r2]
+ 301 00bc 9342     		cmp	r3, r2
+ 302 00be 0DDB     		blt	.L22
+ 240:Src/stm32l0xx_it.c **** 		{
+ 241:Src/stm32l0xx_it.c **** 			// reset f2 pin
+ 242:Src/stm32l0xx_it.c ****     		neg_pack_gen_out_GPIO_Port->BRR = neg_pack_gen_out_Pin ;
+ 303              		.loc 1 242 0
+ 304 00c0 8022     		mov	r2, #128
+ 305 00c2 D200     		lsl	r2, r2, #3
+ 306 00c4 A023     		mov	r3, #160
+ 307 00c6 DB05     		lsl	r3, r3, #23
+ 308 00c8 9A62     		str	r2, [r3, #40]
+ 243:Src/stm32l0xx_it.c **** 			negative_impulse_counter = 0;
+ 309              		.loc 1 243 0
+ 310 00ca 0023     		mov	r3, #0
+ 311 00cc 314A     		ldr	r2, .L28+28
+ 312 00ce 1360     		str	r3, [r2]
+ 244:Src/stm32l0xx_it.c **** 			discharge_counter = 0;
+ 313              		.loc 1 244 0
+ 314 00d0 314A     		ldr	r2, .L28+32
+ 315 00d2 1360     		str	r3, [r2]
+ 245:Src/stm32l0xx_it.c **** 			automat_state = 4;
+ 316              		.loc 1 245 0
+ 317 00d4 0422     		mov	r2, #4
+ 318 00d6 294B     		ldr	r3, .L28+4
+ 319 00d8 1A60     		str	r2, [r3]
+ 320 00da 3BE0     		b	.L16
+ 321              	.L22:
+ 246:Src/stm32l0xx_it.c ****             
+ 247:Src/stm32l0xx_it.c **** 		}
+ 248:Src/stm32l0xx_it.c **** 		else
+ 249:Src/stm32l0xx_it.c **** 		{
+ 250:Src/stm32l0xx_it.c **** 			//increment counter
+ 251:Src/stm32l0xx_it.c **** 			negative_impulse_counter++;
+ 322              		.loc 1 251 0
+ 323 00dc 0133     		add	r3, r3, #1
+ 324 00de 2D4A     		ldr	r2, .L28+28
+ 325 00e0 1360     		str	r3, [r2]
+ 326 00e2 37E0     		b	.L16
+ 327              	.L20:
+ 252:Src/stm32l0xx_it.c **** 		}
+ 253:Src/stm32l0xx_it.c **** 	}
+ 254:Src/stm32l0xx_it.c **** 	else if(automat_state == 4)
+ 328              		.loc 1 254 0
+ 329 00e4 042B     		cmp	r3, #4
+ 330 00e6 1CD1     		bne	.L23
+ 255:Src/stm32l0xx_it.c **** 	{
+ARM GAS  /tmp/ccIxLtvw.s 			page 11
+
+
+ 256:Src/stm32l0xx_it.c **** 		if(discharge_counter == 1)
+ 331              		.loc 1 256 0
+ 332 00e8 2B4B     		ldr	r3, .L28+32
+ 333 00ea 1B68     		ldr	r3, [r3]
+ 334 00ec 012B     		cmp	r3, #1
+ 335 00ee 04D1     		bne	.L24
+ 257:Src/stm32l0xx_it.c **** 		{
+ 258:Src/stm32l0xx_it.c **** 			// set f2 pin
+ 259:Src/stm32l0xx_it.c ****     		f3_out_GPIO_Port->BSRR = f3_out_Pin ;
+ 336              		.loc 1 259 0
+ 337 00f0 8021     		mov	r1, #128
+ 338 00f2 0901     		lsl	r1, r1, #4
+ 339 00f4 A022     		mov	r2, #160
+ 340 00f6 D205     		lsl	r2, r2, #23
+ 341 00f8 9161     		str	r1, [r2, #24]
+ 342              	.L24:
+ 260:Src/stm32l0xx_it.c ****             
+ 261:Src/stm32l0xx_it.c **** 		}
+ 262:Src/stm32l0xx_it.c **** 		if(discharge_counter >= 11)
+ 343              		.loc 1 262 0
+ 344 00fa 0A2B     		cmp	r3, #10
+ 345 00fc 0DDD     		ble	.L25
+ 263:Src/stm32l0xx_it.c **** 		{
+ 264:Src/stm32l0xx_it.c **** 			// reset f2 pin
+ 265:Src/stm32l0xx_it.c ****     		f3_out_GPIO_Port->BRR = f3_out_Pin ;
+ 346              		.loc 1 265 0
+ 347 00fe 8022     		mov	r2, #128
+ 348 0100 1201     		lsl	r2, r2, #4
+ 349 0102 A023     		mov	r3, #160
+ 350 0104 DB05     		lsl	r3, r3, #23
+ 351 0106 9A62     		str	r2, [r3, #40]
+ 266:Src/stm32l0xx_it.c **** 			discharge_counter = 0;
+ 352              		.loc 1 266 0
+ 353 0108 0023     		mov	r3, #0
+ 354 010a 234A     		ldr	r2, .L28+32
+ 355 010c 1360     		str	r3, [r2]
+ 267:Src/stm32l0xx_it.c **** 			delay_counter = 0;
+ 356              		.loc 1 267 0
+ 357 010e 234A     		ldr	r2, .L28+36
+ 358 0110 1360     		str	r3, [r2]
+ 268:Src/stm32l0xx_it.c **** 			automat_state = 5;
+ 359              		.loc 1 268 0
+ 360 0112 0522     		mov	r2, #5
+ 361 0114 194B     		ldr	r3, .L28+4
+ 362 0116 1A60     		str	r2, [r3]
+ 363 0118 1CE0     		b	.L16
+ 364              	.L25:
+ 269:Src/stm32l0xx_it.c ****             
+ 270:Src/stm32l0xx_it.c **** 		}
+ 271:Src/stm32l0xx_it.c **** 		else
+ 272:Src/stm32l0xx_it.c **** 		{
+ 273:Src/stm32l0xx_it.c **** 			//increment counter
+ 274:Src/stm32l0xx_it.c **** 			discharge_counter++;
+ 365              		.loc 1 274 0
+ 366 011a 0133     		add	r3, r3, #1
+ 367 011c 1E4A     		ldr	r2, .L28+32
+ 368 011e 1360     		str	r3, [r2]
+ARM GAS  /tmp/ccIxLtvw.s 			page 12
+
+
+ 369 0120 18E0     		b	.L16
+ 370              	.L23:
+ 275:Src/stm32l0xx_it.c **** 		}
+ 276:Src/stm32l0xx_it.c **** 	}
+ 277:Src/stm32l0xx_it.c **** 	else if(automat_state == 5)
+ 371              		.loc 1 277 0
+ 372 0122 052B     		cmp	r3, #5
+ 373 0124 16D1     		bne	.L16
+ 278:Src/stm32l0xx_it.c **** 	{
+ 279:Src/stm32l0xx_it.c **** 		if(delay_counter >= (DELAY_1_MS*DELAY_LENGTH))
+ 374              		.loc 1 279 0
+ 375 0126 1E4B     		ldr	r3, .L28+40
+ 376 0128 1A68     		ldr	r2, [r3]
+ 377 012a 1E4B     		ldr	r3, .L28+44
+ 378 012c 1B68     		ldr	r3, [r3]
+ 379 012e 5343     		mul	r3, r2
+ 380 0130 1A4A     		ldr	r2, .L28+36
+ 381 0132 1268     		ldr	r2, [r2]
+ 382 0134 9342     		cmp	r3, r2
+ 383 0136 0AD8     		bhi	.L26
+ 280:Src/stm32l0xx_it.c **** 		{
+ 281:Src/stm32l0xx_it.c **** 			delay_counter = 0;
+ 384              		.loc 1 281 0
+ 385 0138 0022     		mov	r2, #0
+ 386 013a 184B     		ldr	r3, .L28+36
+ 387 013c 1A60     		str	r2, [r3]
+ 282:Src/stm32l0xx_it.c **** 			automat_state = 1;
+ 388              		.loc 1 282 0
+ 389 013e 0132     		add	r2, r2, #1
+ 390 0140 0E4B     		ldr	r3, .L28+4
+ 391 0142 1A60     		str	r2, [r3]
+ 283:Src/stm32l0xx_it.c **** 			chock_length_counter++;
+ 392              		.loc 1 283 0
+ 393 0144 184A     		ldr	r2, .L28+48
+ 394 0146 1368     		ldr	r3, [r2]
+ 395 0148 0133     		add	r3, r3, #1
+ 396 014a 1360     		str	r3, [r2]
+ 397 014c 02E0     		b	.L16
+ 398              	.L26:
+ 284:Src/stm32l0xx_it.c ****             
+ 285:Src/stm32l0xx_it.c **** 		}
+ 286:Src/stm32l0xx_it.c **** 		else
+ 287:Src/stm32l0xx_it.c **** 		{
+ 288:Src/stm32l0xx_it.c **** 			//increment counter
+ 289:Src/stm32l0xx_it.c **** 			delay_counter++;
+ 399              		.loc 1 289 0
+ 400 014e 0132     		add	r2, r2, #1
+ 401 0150 124B     		ldr	r3, .L28+36
+ 402 0152 1A60     		str	r2, [r3]
+ 403              	.L16:
+ 290:Src/stm32l0xx_it.c **** 		}
+ 291:Src/stm32l0xx_it.c **** 	}
+ 292:Src/stm32l0xx_it.c **** 
+ 293:Src/stm32l0xx_it.c **** 	//*
+ 294:Src/stm32l0xx_it.c **** 	if(chock_length_counter >= CHOCK_LENGTH)
+ 404              		.loc 1 294 0
+ 405 0154 154B     		ldr	r3, .L28+52
+ARM GAS  /tmp/ccIxLtvw.s 			page 13
+
+
+ 406 0156 1A68     		ldr	r2, [r3]
+ 407 0158 134B     		ldr	r3, .L28+48
+ 408 015a 1B68     		ldr	r3, [r3]
+ 409 015c 9A42     		cmp	r2, r3
+ 410 015e 09D8     		bhi	.L13
+ 295:Src/stm32l0xx_it.c **** 	{
+ 296:Src/stm32l0xx_it.c **** 		// disable tim21 interrupt
+ 297:Src/stm32l0xx_it.c ****     	TIM21->DIER &= ~TIM_DIER_UIE;
+ 411              		.loc 1 297 0
+ 412 0160 134A     		ldr	r2, .L28+56
+ 413 0162 D368     		ldr	r3, [r2, #12]
+ 414 0164 0121     		mov	r1, #1
+ 415 0166 8B43     		bic	r3, r1
+ 416 0168 D360     		str	r3, [r2, #12]
+ 298:Src/stm32l0xx_it.c **** 		
+ 299:Src/stm32l0xx_it.c **** 		chock_length_counter = 0;
+ 417              		.loc 1 299 0
+ 418 016a 0023     		mov	r3, #0
+ 419 016c 0E4A     		ldr	r2, .L28+48
+ 420 016e 1360     		str	r3, [r2]
+ 300:Src/stm32l0xx_it.c **** 		automat_state = 0;
+ 421              		.loc 1 300 0
+ 422 0170 024A     		ldr	r2, .L28+4
+ 423 0172 1360     		str	r3, [r2]
+ 424              	.L13:
+ 301:Src/stm32l0xx_it.c **** 	}
+ 302:Src/stm32l0xx_it.c **** 	//*/
+ 303:Src/stm32l0xx_it.c **** 
+ 304:Src/stm32l0xx_it.c **** }
+ 425              		.loc 1 304 0
+ 426              		@ sp needed
+ 427 0174 7047     		bx	lr
+ 428              	.L29:
+ 429 0176 C046     		.align	2
+ 430              	.L28:
+ 431 0178 00000000 		.word	htim21
+ 432 017c 00000000 		.word	automat_state
+ 433 0180 00000000 		.word	odd_even
+ 434 0184 00000000 		.word	charge_packet_counter
+ 435 0188 00000000 		.word	NUMBER_OF_CHARGE_PULSES
+ 436 018c 00000000 		.word	positive_impulse_counter
+ 437 0190 00000000 		.word	DISCARGE_IMPULSE_LENGTH
+ 438 0194 00000000 		.word	negative_impulse_counter
+ 439 0198 00000000 		.word	discharge_counter
+ 440 019c 00000000 		.word	delay_counter
+ 441 01a0 00000000 		.word	DELAY_1_MS
+ 442 01a4 00000000 		.word	DELAY_LENGTH
+ 443 01a8 00000000 		.word	chock_length_counter
+ 444 01ac 00000000 		.word	CHOCK_LENGTH
+ 445 01b0 00080140 		.word	1073809408
+ 446              		.cfi_endproc
+ 447              	.LFE43:
+ 449              		.section	.text.__HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+ 450              		.align	2
+ 451              		.global	__HAL_TIM_PeriodElapsedCallback
+ 452              		.code	16
+ 453              		.thumb_func
+ARM GAS  /tmp/ccIxLtvw.s 			page 14
+
+
+ 455              	__HAL_TIM_PeriodElapsedCallback:
+ 456              	.LFB44:
+ 305:Src/stm32l0xx_it.c **** 
+ 306:Src/stm32l0xx_it.c **** extern int usec_timer_flag;
+ 307:Src/stm32l0xx_it.c **** void __HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+ 308:Src/stm32l0xx_it.c **** {
+ 457              		.loc 1 308 0
+ 458              		.cfi_startproc
+ 459              	.LVL4:
+ 309:Src/stm32l0xx_it.c **** 	// set flag
+ 310:Src/stm32l0xx_it.c **** 	usec_timer_flag = 1;
+ 460              		.loc 1 310 0
+ 461 0000 0122     		mov	r2, #1
+ 462 0002 014B     		ldr	r3, .L31
+ 463 0004 1A60     		str	r2, [r3]
+ 311:Src/stm32l0xx_it.c **** }
+ 464              		.loc 1 311 0
+ 465              		@ sp needed
+ 466 0006 7047     		bx	lr
+ 467              	.L32:
+ 468              		.align	2
+ 469              	.L31:
+ 470 0008 00000000 		.word	usec_timer_flag
+ 471              		.cfi_endproc
+ 472              	.LFE44:
+ 474              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 475              		.align	2
+ 476              		.global	USART1_IRQHandler
+ 477              		.code	16
+ 478              		.thumb_func
+ 480              	USART1_IRQHandler:
+ 481              	.LFB45:
+ 312:Src/stm32l0xx_it.c **** 
+ 313:Src/stm32l0xx_it.c **** 
+ 314:Src/stm32l0xx_it.c **** 
+ 315:Src/stm32l0xx_it.c **** extern int usart_rxne_flag;
+ 316:Src/stm32l0xx_it.c **** extern char usart_buffer[256];
+ 317:Src/stm32l0xx_it.c **** extern int usart_buffer_index;
+ 318:Src/stm32l0xx_it.c **** 
+ 319:Src/stm32l0xx_it.c **** void USART1_IRQHandler(void)
+ 320:Src/stm32l0xx_it.c **** {
+ 482              		.loc 1 320 0
+ 483              		.cfi_startproc
+ 321:Src/stm32l0xx_it.c **** 	uint32_t isrflags   = USART1->ISR;
+ 484              		.loc 1 321 0
+ 485 0000 0E4B     		ldr	r3, .L35
+ 486 0002 DA69     		ldr	r2, [r3, #28]
+ 487              	.LVL5:
+ 322:Src/stm32l0xx_it.c **** 	uint32_t cr1its     = USART1->CR1;
+ 488              		.loc 1 322 0
+ 489 0004 1B68     		ldr	r3, [r3]
+ 490              	.LVL6:
+ 323:Src/stm32l0xx_it.c **** 	uint32_t cr3its;
+ 324:Src/stm32l0xx_it.c **** 	uint32_t errorflags;
+ 325:Src/stm32l0xx_it.c **** 
+ 326:Src/stm32l0xx_it.c **** 	uint16_t usart_data;
+ 327:Src/stm32l0xx_it.c **** 
+ARM GAS  /tmp/ccIxLtvw.s 			page 15
+
+
+ 328:Src/stm32l0xx_it.c **** 	/* If no error occurs */
+ 329:Src/stm32l0xx_it.c **** 	errorflags = (isrflags & (uint32_t)(USART_ISR_PE | USART_ISR_FE | USART_ISR_ORE | USART_ISR_NE));
+ 330:Src/stm32l0xx_it.c **** 	if (errorflags == RESET)
+ 491              		.loc 1 330 0
+ 492 0006 1107     		lsl	r1, r2, #28
+ 493 0008 16D1     		bne	.L33
+ 331:Src/stm32l0xx_it.c **** 	{
+ 332:Src/stm32l0xx_it.c ****     	/* UART in mode Receiver ---------------------------------------------------*/
+ 333:Src/stm32l0xx_it.c ****     	if(((isrflags & USART_ISR_RXNE) != RESET) && ((cr1its & USART_CR1_RXNEIE) != RESET))
+ 494              		.loc 1 333 0
+ 495 000a 9206     		lsl	r2, r2, #26
+ 496 000c 14D5     		bpl	.L33
+ 497              	.LVL7:
+ 498              		.loc 1 333 0 is_stmt 0 discriminator 1
+ 499 000e 9B06     		lsl	r3, r3, #26
+ 500 0010 12D5     		bpl	.L33
+ 501              	.LVL8:
+ 334:Src/stm32l0xx_it.c ****     	{
+ 335:Src/stm32l0xx_it.c ****       		//UART_Receive_IT(huart);
+ 336:Src/stm32l0xx_it.c ****       		//return;
+ 337:Src/stm32l0xx_it.c ****     		usart_data = (uint16_t) USART1->RDR;
+ 502              		.loc 1 337 0 is_stmt 1
+ 503 0012 0A4B     		ldr	r3, .L35
+ 504 0014 5A6A     		ldr	r2, [r3, #36]
+ 505              	.LVL9:
+ 338:Src/stm32l0xx_it.c **** 			usart_rxne_flag = 1;
+ 506              		.loc 1 338 0
+ 507 0016 0121     		mov	r1, #1
+ 508 0018 094B     		ldr	r3, .L35+4
+ 509 001a 1960     		str	r1, [r3]
+ 339:Src/stm32l0xx_it.c **** 
+ 340:Src/stm32l0xx_it.c **** 			usart_buffer[usart_buffer_index] = (char)usart_data;
+ 510              		.loc 1 340 0
+ 511 001c 0949     		ldr	r1, .L35+8
+ 512 001e 0B68     		ldr	r3, [r1]
+ 513 0020 D2B2     		uxtb	r2, r2
+ 514              	.LVL10:
+ 515 0022 0948     		ldr	r0, .L35+12
+ 516 0024 C254     		strb	r2, [r0, r3]
+ 341:Src/stm32l0xx_it.c **** 			usart_buffer_index++;
+ 517              		.loc 1 341 0
+ 518 0026 0133     		add	r3, r3, #1
+ 519 0028 0B60     		str	r3, [r1]
+ 342:Src/stm32l0xx_it.c **** 
+ 343:Src/stm32l0xx_it.c **** 			if((char)usart_data == '\n')
+ 520              		.loc 1 343 0
+ 521 002a 0A2A     		cmp	r2, #10
+ 522 002c 04D1     		bne	.L33
+ 344:Src/stm32l0xx_it.c **** 			{
+ 345:Src/stm32l0xx_it.c **** 
+ 346:Src/stm32l0xx_it.c **** 				usart_buffer[usart_buffer_index] = 0;
+ 523              		.loc 1 346 0
+ 524 002e 0021     		mov	r1, #0
+ 525 0030 C154     		strb	r1, [r0, r3]
+ 347:Src/stm32l0xx_it.c **** 				usart_string_received_flag = 1;
+ 526              		.loc 1 347 0
+ 527 0032 0122     		mov	r2, #1
+ARM GAS  /tmp/ccIxLtvw.s 			page 16
+
+
+ 528 0034 054B     		ldr	r3, .L35+16
+ 529 0036 1A60     		str	r2, [r3]
+ 530              	.L33:
+ 348:Src/stm32l0xx_it.c **** 
+ 349:Src/stm32l0xx_it.c **** 			}
+ 350:Src/stm32l0xx_it.c ****     	}
+ 351:Src/stm32l0xx_it.c ****   }  
+ 352:Src/stm32l0xx_it.c **** }
+ 531              		.loc 1 352 0
+ 532              		@ sp needed
+ 533 0038 7047     		bx	lr
+ 534              	.L36:
+ 535 003a C046     		.align	2
+ 536              	.L35:
+ 537 003c 00380140 		.word	1073821696
+ 538 0040 00000000 		.word	usart_rxne_flag
+ 539 0044 00000000 		.word	usart_buffer_index
+ 540 0048 00000000 		.word	usart_buffer
+ 541 004c 00000000 		.word	usart_string_received_flag
+ 542              		.cfi_endproc
+ 543              	.LFE45:
+ 545              		.text
+ 546              	.Letext0:
+ 547              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 548              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 549              		.file 4 "Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l051xx.h"
+ 550              		.file 5 "Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h"
+ 551              		.file 6 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h"
+ 552              		.file 7 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h"
+ 553              		.file 8 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h"
+ 554              		.file 9 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h"
+ 555              		.file 10 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h"
+ARM GAS  /tmp/ccIxLtvw.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l0xx_it.c
-     /tmp/ccztG7uS.s:18     .text.NMI_Handler:0000000000000000 $t
-     /tmp/ccztG7uS.s:23     .text.NMI_Handler:0000000000000000 NMI_Handler
-     /tmp/ccztG7uS.s:35     .text.HardFault_Handler:0000000000000000 $t
-     /tmp/ccztG7uS.s:40     .text.HardFault_Handler:0000000000000000 HardFault_Handler
-     /tmp/ccztG7uS.s:51     .text.SVC_Handler:0000000000000000 $t
-     /tmp/ccztG7uS.s:56     .text.SVC_Handler:0000000000000000 SVC_Handler
-     /tmp/ccztG7uS.s:67     .text.PendSV_Handler:0000000000000000 $t
-     /tmp/ccztG7uS.s:72     .text.PendSV_Handler:0000000000000000 PendSV_Handler
-     /tmp/ccztG7uS.s:83     .text.SysTick_Handler:0000000000000000 $t
-     /tmp/ccztG7uS.s:88     .text.SysTick_Handler:0000000000000000 SysTick_Handler
-     /tmp/ccztG7uS.s:110    .text.TIM2_IRQHandler:0000000000000000 $t
-     /tmp/ccztG7uS.s:115    .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
-     /tmp/ccztG7uS.s:134    .text.TIM2_IRQHandler:000000000000000c $d
-     /tmp/ccztG7uS.s:139    .text.TIM6_IRQHandler:0000000000000000 $t
-     /tmp/ccztG7uS.s:144    .text.TIM6_IRQHandler:0000000000000000 TIM6_IRQHandler
-     /tmp/ccztG7uS.s:163    .text.TIM6_IRQHandler:000000000000000c $d
-     /tmp/ccztG7uS.s:168    .text.TIM21_IRQHandler:0000000000000000 $t
-     /tmp/ccztG7uS.s:173    .text.TIM21_IRQHandler:0000000000000000 TIM21_IRQHandler
-     /tmp/ccztG7uS.s:192    .text.TIM21_IRQHandler:000000000000000c $d
-     /tmp/ccztG7uS.s:197    .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
-     /tmp/ccztG7uS.s:202    .text.HAL_TIM_PeriodElapsedCallback:0000000000000000 HAL_TIM_PeriodElapsedCallback
-     /tmp/ccztG7uS.s:217    .text.HAL_TIM_PeriodElapsedCallback:0000000000000008 $d
+     /tmp/ccIxLtvw.s:18     .text.NMI_Handler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:23     .text.NMI_Handler:0000000000000000 NMI_Handler
+     /tmp/ccIxLtvw.s:35     .text.HardFault_Handler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:40     .text.HardFault_Handler:0000000000000000 HardFault_Handler
+     /tmp/ccIxLtvw.s:51     .text.SVC_Handler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:56     .text.SVC_Handler:0000000000000000 SVC_Handler
+     /tmp/ccIxLtvw.s:67     .text.PendSV_Handler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:72     .text.PendSV_Handler:0000000000000000 PendSV_Handler
+     /tmp/ccIxLtvw.s:83     .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:88     .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccIxLtvw.s:110    .text.TIM2_IRQHandler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:115    .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
+     /tmp/ccIxLtvw.s:134    .text.TIM2_IRQHandler:000000000000000c $d
+     /tmp/ccIxLtvw.s:139    .text.TIM6_IRQHandler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:144    .text.TIM6_IRQHandler:0000000000000000 TIM6_IRQHandler
+     /tmp/ccIxLtvw.s:163    .text.TIM6_IRQHandler:000000000000000c $d
+     /tmp/ccIxLtvw.s:168    .text.TIM21_IRQHandler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:173    .text.TIM21_IRQHandler:0000000000000000 TIM21_IRQHandler
+     /tmp/ccIxLtvw.s:431    .text.TIM21_IRQHandler:0000000000000178 $d
+     /tmp/ccIxLtvw.s:450    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
+     /tmp/ccIxLtvw.s:455    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000000 __HAL_TIM_PeriodElapsedCallback
+     /tmp/ccIxLtvw.s:470    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000008 $d
+     /tmp/ccIxLtvw.s:475    .text.USART1_IRQHandler:0000000000000000 $t
+     /tmp/ccIxLtvw.s:480    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
+     /tmp/ccIxLtvw.s:537    .text.USART1_IRQHandler:000000000000003c $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -444,4 +972,21 @@ HAL_TIM_IRQHandler
 htim2
 htim6
 htim21
+automat_state
+odd_even
+charge_packet_counter
+NUMBER_OF_CHARGE_PULSES
+positive_impulse_counter
+DISCARGE_IMPULSE_LENGTH
+negative_impulse_counter
+discharge_counter
+delay_counter
+DELAY_1_MS
+DELAY_LENGTH
+chock_length_counter
+CHOCK_LENGTH
 usec_timer_flag
+usart_rxne_flag
+usart_buffer_index
+usart_buffer
+usart_string_received_flag

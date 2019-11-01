@@ -155,27 +155,198 @@ void TIM6_DAC_IRQHandler(void)
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
+
+
+
+
+extern int usec_timer_flag;
+
+extern  int automat_state;
+extern int odd_even;
+
+extern int charge_packet_counter;
+extern int positive_impulse_counter;
+extern int negative_impulse_counter;
+extern int discharge_counter;
+
+extern uint32_t delay_counter;
+extern uint32_t chock_length_counter;
+
+
+extern int DELAY_1_MS;
+extern int NUMBER_OF_CHARGE_PULSES;
+extern int DELAY_LENGTH; 
+extern int CHOCK_LENGTH;
+extern int DISCARGE_IMPULSE_LENGTH;
+
+extern int usart_string_received_flag;
+
 /**
 * @brief This function handles TIM21 global interrupt.
 */
 void TIM21_IRQHandler(void)
 {
-  /* USER CODE BEGIN TIM21_IRQn 0 */
+	// clear it
+	(&htim21)->Instance->SR = ~TIM_IT_UPDATE;
 
-  /* USER CODE END TIM21_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim21);
-  /* USER CODE BEGIN TIM21_IRQn 1 */
+	if(automat_state == 1)
+	{
+		if(odd_even)
+		{
+			charge_packet_counter++;
+		}
+		odd_even = (odd_even + 1) % 2;
+		usec_gen_out_GPIO_Port->ODR ^= usec_gen_out_Pin;// toggle usec generator pin
 
-  /* USER CODE END TIM21_IRQn 1 */
+		if(charge_packet_counter >= NUMBER_OF_CHARGE_PULSES)
+		{
+			charge_packet_counter = 0;
+			automat_state = 2;
+			positive_impulse_counter = 0;
+		}
+	}
+	else if(automat_state == 2)
+	{
+		if(positive_impulse_counter == 1)
+		{
+			// set f1 pin
+    		pos_pack_gen_out_GPIO_Port->BSRR = pos_pack_gen_out_Pin ;
+            
+		}
+		if(positive_impulse_counter >= DISCARGE_IMPULSE_LENGTH)
+		{
+			// reset f1 pin
+    		pos_pack_gen_out_GPIO_Port->BRR = pos_pack_gen_out_Pin ;
+			positive_impulse_counter = 0;
+			negative_impulse_counter = 0;
+			automat_state = 3;
+            
+		}
+		else
+		{
+			//increment counter
+			positive_impulse_counter++;
+		}
+	}
+	else if(automat_state == 3)
+	{
+		if(negative_impulse_counter == 1)
+		{
+			// set f2 pin
+    		neg_pack_gen_out_GPIO_Port->BSRR = neg_pack_gen_out_Pin ;
+            
+		}
+		if(negative_impulse_counter >= DISCARGE_IMPULSE_LENGTH)
+		{
+			// reset f2 pin
+    		neg_pack_gen_out_GPIO_Port->BRR = neg_pack_gen_out_Pin ;
+			negative_impulse_counter = 0;
+			discharge_counter = 0;
+			automat_state = 4;
+            
+		}
+		else
+		{
+			//increment counter
+			negative_impulse_counter++;
+		}
+	}
+	else if(automat_state == 4)
+	{
+		if(discharge_counter == 1)
+		{
+			// set f2 pin
+    		f3_out_GPIO_Port->BSRR = f3_out_Pin ;
+            
+		}
+		if(discharge_counter >= 11)
+		{
+			// reset f2 pin
+    		f3_out_GPIO_Port->BRR = f3_out_Pin ;
+			discharge_counter = 0;
+			delay_counter = 0;
+			automat_state = 5;
+            
+		}
+		else
+		{
+			//increment counter
+			discharge_counter++;
+		}
+	}
+	else if(automat_state == 5)
+	{
+		if(delay_counter >= (DELAY_1_MS*DELAY_LENGTH))
+		{
+			delay_counter = 0;
+			automat_state = 1;
+			chock_length_counter++;
+            
+		}
+		else
+		{
+			//increment counter
+			delay_counter++;
+		}
+	}
+
+	//*
+	if(chock_length_counter >= CHOCK_LENGTH)
+	{
+		// disable tim21 interrupt
+    	TIM21->DIER &= ~TIM_DIER_UIE;
+		
+		chock_length_counter = 0;
+		automat_state = 0;
+	}
+	//*/
+
 }
 
 extern int usec_timer_flag;
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+void __HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	// set flag
 	usec_timer_flag = 1;
 }
-/* USER CODE BEGIN 1 */
 
-/* USER CODE END 1 */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+
+extern int usart_rxne_flag;
+extern char usart_buffer[256];
+extern int usart_buffer_index;
+
+void USART1_IRQHandler(void)
+{
+	uint32_t isrflags   = USART1->ISR;
+	uint32_t cr1its     = USART1->CR1;
+	uint32_t cr3its;
+	uint32_t errorflags;
+
+	uint16_t usart_data;
+
+	/* If no error occurs */
+	errorflags = (isrflags & (uint32_t)(USART_ISR_PE | USART_ISR_FE | USART_ISR_ORE | USART_ISR_NE));
+	if (errorflags == RESET)
+	{
+    	/* UART in mode Receiver ---------------------------------------------------*/
+    	if(((isrflags & USART_ISR_RXNE) != RESET) && ((cr1its & USART_CR1_RXNEIE) != RESET))
+    	{
+      		//UART_Receive_IT(huart);
+      		//return;
+    		usart_data = (uint16_t) USART1->RDR;
+			usart_rxne_flag = 1;
+
+			usart_buffer[usart_buffer_index] = (char)usart_data;
+			usart_buffer_index++;
+
+			if((char)usart_data == '\n')
+			{
+
+				usart_buffer[usart_buffer_index] = 0;
+				usart_string_received_flag = 1;
+
+			}
+    	}
+  }  
+}

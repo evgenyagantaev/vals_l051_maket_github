@@ -2775,7 +2775,7 @@ void HAL_TIM_IRQHandler(TIM_HandleTypeDef *htim)
     if(__HAL_TIM_GET_IT_SOURCE(htim, TIM_IT_UPDATE) !=RESET)
     {
       __HAL_TIM_CLEAR_IT(htim, TIM_IT_UPDATE);
-      HAL_TIM_PeriodElapsedCallback(htim);
+      __HAL_TIM_PeriodElapsedCallback(htim);
     }
   }
   /* TIM Trigger detection event */
@@ -4089,8 +4089,7 @@ uint32_t HAL_TIM_ReadCapturedValue(TIM_HandleTypeDef *htim, uint32_t Channel)
 __weak void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
   /* Prevent unused argument(s) compilation warning */
-  //UNUSED(htim);
-  usec_timer_flag = 1;
+  UNUSED(htim);
 
   /* NOTE : This function Should not be modified, when the callback is needed,
             the __HAL_TIM_PeriodElapsedCallback could be implemented in the user file

@@ -108,9 +108,9 @@ void MX_TIM21_Init(void)
   TIM_MasterConfigTypeDef sMasterConfig;
 
   htim21.Instance = TIM21;
-  htim21.Init.Prescaler = 1000;
+  htim21.Init.Prescaler = 0;
   htim21.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim21.Init.Period = 128;
+  htim21.Init.Period = 640;
   htim21.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim21) != HAL_OK)
   {
@@ -206,6 +206,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
     /* TIM21 interrupt Init */
     HAL_NVIC_SetPriority(TIM21_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(TIM21_IRQn);
+    //TIM21->DIER |= TIM_DIER_UIE;
   /* USER CODE BEGIN TIM21_MspInit 1 */
 
   /* USER CODE END TIM21_MspInit 1 */

@@ -46,12 +46,38 @@
 #include "usart.h"
 #include "gpio.h"
 
+#include "ssd1306.h"
 
 /* Private variables ---------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
+
+int DELAY_1_MS = 50;
+int NUMBER_OF_CHARGE_PULSES = 8;
+int DELAY_LENGTH = 11;
+int CHOCK_LENGTH = 10;
+int DISCARGE_IMPULSE_LENGTH = 11;
 
 int usec_timer_flag = 0;
+
+int automat_state = 0;
+int odd_even = 0;
+
+int charge_packet_counter = 0;
+int positive_impulse_counter = 0;
+int negative_impulse_counter = 0;
+int discharge_counter = 0;
+
+uint32_t delay_counter = 0;
+uint32_t chock_length_counter = 0;
+
+int usart_rxne_flag = 0;
+int usart_string_received_flag = 0;
+
+char message[64];
+
+char usart_buffer[256];
+int usart_buffer_index = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -60,11 +86,6 @@ void usec_timer_action();
 /* Private function prototypes -----------------------------------------------*/
 
 
-/**
-  * @brief  The application entry point.
-  *
-  * @retval None
-  */
 int main(void)
 {
 
@@ -83,21 +104,103 @@ int main(void)
     MX_GPIO_Init();
     MX_TIM2_Init();
     MX_TIM6_Init();
-    MX_TIM21_Init();
-	HAL_TIM_Base_Start(&htim21);
     MX_TIM22_Init();
     MX_SPI2_Init();
     MX_USART1_UART_Init();
     MX_I2C1_Init();
     MX_ADC_Init();
                                                                                     
+    ssd1306_set_i2c_port(&hi2c1, 1);
+  	ssd1306_Init();
+  	HAL_Delay(100);
+
+  	ssd1306_Fill(White);
+  	ssd1306_UpdateScreen();
+  	HAL_Delay(100);
+  	ssd1306_Fill(Black);
+  	ssd1306_UpdateScreen();
+  	HAL_Delay(100);
+
+  	ssd1306_SetCursor(0,0);
+  	ssd1306_WriteString("VALS", Font_16x26, White);
+  	//ssd1306_SetCursor(0,30);
+  	//ssd1306_WriteString("Start..", Font_16x26, White);
+  	ssd1306_UpdateScreen();
+  	HAL_Delay(100);
+
+
+
+	
   	HAL_GPIO_WritePin(led_out_GPIO_Port, led_out_Pin, GPIO_PIN_RESET);// turn led on
 
+	/* Disable SysTick Interrupt */
+	SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
+
+    MX_TIM21_Init();
+	HAL_TIM_Base_Start(&htim21);
+    TIM21->DIER |= TIM_DIER_UIE;
+
+	sprintf(message, "t");
+
+	automat_state = 1;
     /* Infinite loop */
     while (1)
     {
-		usec_timer_action();                                                                                    
-                                                                                    
+		// Disable SysTick Interrupt 
+		//SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
+		// enable tim21 interrupt
+    	//TIM21->DIER |= TIM_DIER_UIE;
+
+		//while(automat_state != 0);
+
+		// disable tim21 interrupt
+    	//TIM21->DIER &= ~TIM_DIER_UIE;
+		// Enable SysTick Interrupt
+		//SysTick->CTRL = SysTick_CTRL_TICKINT_Msk;
+  		//HAL_Delay(11);
+		//automat_state = 1;
+
+		// toggle gpio
+  		//usec_gen_out_GPIO_Port->ODR ^= usec_gen_out_Pin;// toggle usec generator pin
+
+    	//USART1->CR1 |= USART_CR1_RXNEIE;
+    	//USART1->CR1 &= ~USART_CR1_RXNEIE;
+
+		//while(((USART1->ISR) & UART_FLAG_RXNE) == RESET);
+		//HAL_UART_Transmit(&huart1, message, strlen((const char *)message), 500);
+		//*
+		//if(automat_state == 0)
+		//if(usart_rxne_flag)
+
+
+		if(usart_string_received_flag)
+		{
+			int on_off_flag = 0;
+			int channel = 1;
+			int aux;
+
+			sscanf(usart_buffer, "e%1dc%2dk%3dl%4dd%2dn%4dp%5dm%3d\r\n",
+			       &on_off_flag, &channel, &NUMBER_OF_CHARGE_PULSES, &DISCARGE_IMPULSE_LENGTH,
+				   &DELAY_LENGTH, &CHOCK_LENGTH, &aux, &aux);
+			DISCARGE_IMPULSE_LENGTH = DISCARGE_IMPULSE_LENGTH/20 + 1;
+			usart_string_received_flag = 0;
+			usart_buffer_index = 0;
+
+			if(on_off_flag)
+			{
+				// start generator
+    			MX_TIM21_Init();
+				HAL_TIM_Base_Start(&htim21);
+
+				automat_state = 1;
+				chock_length_counter = 0;
+				// enable tim21 interrupt
+    			TIM21->DIER |= TIM_DIER_UIE;
+			}
+		}
+
+
+
     }
 
 }
@@ -211,17 +314,20 @@ void assert_failed(uint8_t* file, uint32_t line)
 int usec_timer_counter = 0;
 void usec_timer_action()
 {
-	// drop flag
-	usec_timer_flag = 0;
-	// increment counter
-	usec_timer_counter++;
-	// check counter value
-	if(usec_timer_counter > 1000)
+	if(usec_timer_flag)
 	{
-		// toggle gpio
-	  	HAL_GPIO_TogglePin(usec_gen_out_GPIO_Port, usec_gen_out_Pin);// toggle usec generator pin
-		usec_timer_counter = 0;
+		// drop flag
+		usec_timer_flag = 0;
+		// increment counter
+		usec_timer_counter++;
+		// check counter value
+		if(usec_timer_counter > 1)
+		{
+			// toggle gpio
+  			usec_gen_out_GPIO_Port->ODR ^= usec_gen_out_Pin;// toggle usec generator pin
+			usec_timer_counter = 0;
 
+		}
 	}
 
 }
