@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccxuUfCg.s 			page 1
+ARM GAS  /tmp/ccHSnPdN.s 			page 1
 
 
    1              		.cpu cortex-m0plus
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccxuUfCg.s 			page 1
   31:Src/gpio.c    ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
   32:Src/gpio.c    ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
   33:Src/gpio.c    ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-ARM GAS  /tmp/ccxuUfCg.s 			page 2
+ARM GAS  /tmp/ccHSnPdN.s 			page 2
 
 
   34:Src/gpio.c    ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccxuUfCg.s 			page 1
   47 0010 2A40     		and	r2, r5
   48 0012 0192     		str	r2, [sp, #4]
   49 0014 019A     		ldr	r2, [sp, #4]
-ARM GAS  /tmp/ccxuUfCg.s 			page 3
+ARM GAS  /tmp/ccHSnPdN.s 			page 3
 
 
   50              	.LBE2:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccxuUfCg.s 			page 1
   84:Src/gpio.c    ****   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
   87              		.loc 1 84 0
   88 004c 381C     		mov	r0, r7
-ARM GAS  /tmp/ccxuUfCg.s 			page 4
+ARM GAS  /tmp/ccHSnPdN.s 			page 4
 
 
   89 004e 03A9     		add	r1, sp, #12
@@ -227,14 +227,14 @@ ARM GAS  /tmp/ccxuUfCg.s 			page 1
  122              		.file 3 "/usr/include/newlib/sys/_stdint.h"
  123              		.file 4 "Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l051xx.h"
  124              		.file 5 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_gpio.h"
-ARM GAS  /tmp/ccxuUfCg.s 			page 5
+ARM GAS  /tmp/ccHSnPdN.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 gpio.c
-     /tmp/ccxuUfCg.s:18     .text.MX_GPIO_Init:0000000000000000 $t
-     /tmp/ccxuUfCg.s:23     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
-     /tmp/ccxuUfCg.s:112    .text.MX_GPIO_Init:0000000000000068 $d
+     /tmp/ccHSnPdN.s:18     .text.MX_GPIO_Init:0000000000000000 $t
+     /tmp/ccHSnPdN.s:23     .text.MX_GPIO_Init:0000000000000000 MX_GPIO_Init
+     /tmp/ccHSnPdN.s:112    .text.MX_GPIO_Init:0000000000000068 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

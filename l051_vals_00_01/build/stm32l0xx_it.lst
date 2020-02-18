@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccIxLtvw.s 			page 1
+ARM GAS  /tmp/ccZtQaYQ.s 			page 1
 
 
    1              		.cpu cortex-m0plus
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
   31:Src/stm32l0xx_it.c ****   ******************************************************************************
   32:Src/stm32l0xx_it.c ****   */
   33:Src/stm32l0xx_it.c **** /* Includes ------------------------------------------------------------------*/
-ARM GAS  /tmp/ccIxLtvw.s 			page 2
+ARM GAS  /tmp/ccZtQaYQ.s 			page 2
 
 
   34:Src/stm32l0xx_it.c **** #include "stm32l0xx_hal.h"
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
   71:Src/stm32l0xx_it.c ****   /* USER CODE END HardFault_IRQn 0 */
   72:Src/stm32l0xx_it.c ****   while (1)
   73:Src/stm32l0xx_it.c ****   {
-ARM GAS  /tmp/ccIxLtvw.s 			page 3
+ARM GAS  /tmp/ccZtQaYQ.s 			page 3
 
 
   74:Src/stm32l0xx_it.c ****     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  101:Src/stm32l0xx_it.c **** 
  102:Src/stm32l0xx_it.c ****   /* USER CODE END PendSV_IRQn 0 */
  103:Src/stm32l0xx_it.c ****   /* USER CODE BEGIN PendSV_IRQn 1 */
-ARM GAS  /tmp/ccIxLtvw.s 			page 4
+ARM GAS  /tmp/ccZtQaYQ.s 			page 4
 
 
  104:Src/stm32l0xx_it.c **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  116              	.LFB41:
  122:Src/stm32l0xx_it.c **** 
  123:Src/stm32l0xx_it.c **** /******************************************************************************/
-ARM GAS  /tmp/ccIxLtvw.s 			page 5
+ARM GAS  /tmp/ccZtQaYQ.s 			page 5
 
 
  124:Src/stm32l0xx_it.c **** /* STM32L0xx Peripheral Interrupt Handlers                                    */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  148 0000 08B5     		push	{r3, lr}
  149              	.LCFI2:
  150              		.cfi_def_cfa_offset 8
-ARM GAS  /tmp/ccIxLtvw.s 			page 6
+ARM GAS  /tmp/ccZtQaYQ.s 			page 6
 
 
  151              		.cfi_offset 3, -8
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  181:Src/stm32l0xx_it.c **** 
  182:Src/stm32l0xx_it.c **** extern int usart_string_received_flag;
  183:Src/stm32l0xx_it.c **** 
-ARM GAS  /tmp/ccIxLtvw.s 			page 7
+ARM GAS  /tmp/ccZtQaYQ.s 			page 7
 
 
  184:Src/stm32l0xx_it.c **** /**
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  213 003a 4900     		lsl	r1, r1, #1
  214 003c 4B40     		eor	r3, r1
  215 003e 5361     		str	r3, [r2, #20]
-ARM GAS  /tmp/ccIxLtvw.s 			page 8
+ARM GAS  /tmp/ccZtQaYQ.s 			page 8
 
 
  200:Src/stm32l0xx_it.c **** 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  253              		.loc 1 216 0
  254 0076 464A     		ldr	r2, .L28+24
  255 0078 1268     		ldr	r2, [r2]
-ARM GAS  /tmp/ccIxLtvw.s 			page 9
+ARM GAS  /tmp/ccZtQaYQ.s 			page 9
 
 
  256 007a 9342     		cmp	r3, r2
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  236:Src/stm32l0xx_it.c ****     		neg_pack_gen_out_GPIO_Port->BSRR = neg_pack_gen_out_Pin ;
  291              		.loc 1 236 0
  292 00ae 8021     		mov	r1, #128
-ARM GAS  /tmp/ccIxLtvw.s 			page 10
+ARM GAS  /tmp/ccZtQaYQ.s 			page 10
 
 
  293 00b0 C900     		lsl	r1, r1, #3
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  329 00e4 042B     		cmp	r3, #4
  330 00e6 1CD1     		bne	.L23
  255:Src/stm32l0xx_it.c **** 	{
-ARM GAS  /tmp/ccIxLtvw.s 			page 11
+ARM GAS  /tmp/ccZtQaYQ.s 			page 11
 
 
  256:Src/stm32l0xx_it.c **** 		if(discharge_counter == 1)
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  366 011a 0133     		add	r3, r3, #1
  367 011c 1E4A     		ldr	r2, .L28+32
  368 011e 1360     		str	r3, [r2]
-ARM GAS  /tmp/ccIxLtvw.s 			page 12
+ARM GAS  /tmp/ccZtQaYQ.s 			page 12
 
 
  369 0120 18E0     		b	.L16
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  294:Src/stm32l0xx_it.c **** 	if(chock_length_counter >= CHOCK_LENGTH)
  404              		.loc 1 294 0
  405 0154 154B     		ldr	r3, .L28+52
-ARM GAS  /tmp/ccIxLtvw.s 			page 13
+ARM GAS  /tmp/ccZtQaYQ.s 			page 13
 
 
  406 0156 1A68     		ldr	r2, [r3]
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  451              		.global	__HAL_TIM_PeriodElapsedCallback
  452              		.code	16
  453              		.thumb_func
-ARM GAS  /tmp/ccIxLtvw.s 			page 14
+ARM GAS  /tmp/ccZtQaYQ.s 			page 14
 
 
  455              	__HAL_TIM_PeriodElapsedCallback:
@@ -826,7 +826,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  483              		.cfi_startproc
  321:Src/stm32l0xx_it.c **** 	uint32_t isrflags   = USART1->ISR;
  484              		.loc 1 321 0
- 485 0000 0E4B     		ldr	r3, .L35
+ 485 0000 0D4B     		ldr	r3, .L35
  486 0002 DA69     		ldr	r2, [r3, #28]
  487              	.LVL5:
  322:Src/stm32l0xx_it.c **** 	uint32_t cr1its     = USART1->CR1;
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  325:Src/stm32l0xx_it.c **** 
  326:Src/stm32l0xx_it.c **** 	uint16_t usart_data;
  327:Src/stm32l0xx_it.c **** 
-ARM GAS  /tmp/ccIxLtvw.s 			page 15
+ARM GAS  /tmp/ccZtQaYQ.s 			page 15
 
 
  328:Src/stm32l0xx_it.c **** 	/* If no error occurs */
@@ -846,123 +846,122 @@ ARM GAS  /tmp/ccIxLtvw.s 			page 1
  330:Src/stm32l0xx_it.c **** 	if (errorflags == RESET)
  491              		.loc 1 330 0
  492 0006 1107     		lsl	r1, r2, #28
- 493 0008 16D1     		bne	.L33
+ 493 0008 15D1     		bne	.L33
  331:Src/stm32l0xx_it.c **** 	{
  332:Src/stm32l0xx_it.c ****     	/* UART in mode Receiver ---------------------------------------------------*/
  333:Src/stm32l0xx_it.c ****     	if(((isrflags & USART_ISR_RXNE) != RESET) && ((cr1its & USART_CR1_RXNEIE) != RESET))
  494              		.loc 1 333 0
  495 000a 9206     		lsl	r2, r2, #26
- 496 000c 14D5     		bpl	.L33
+ 496 000c 13D5     		bpl	.L33
  497              	.LVL7:
  498              		.loc 1 333 0 is_stmt 0 discriminator 1
  499 000e 9B06     		lsl	r3, r3, #26
- 500 0010 12D5     		bpl	.L33
+ 500 0010 11D5     		bpl	.L33
  501              	.LVL8:
  334:Src/stm32l0xx_it.c ****     	{
  335:Src/stm32l0xx_it.c ****       		//UART_Receive_IT(huart);
  336:Src/stm32l0xx_it.c ****       		//return;
  337:Src/stm32l0xx_it.c ****     		usart_data = (uint16_t) USART1->RDR;
  502              		.loc 1 337 0 is_stmt 1
- 503 0012 0A4B     		ldr	r3, .L35
+ 503 0012 094B     		ldr	r3, .L35
  504 0014 5A6A     		ldr	r2, [r3, #36]
  505              	.LVL9:
- 338:Src/stm32l0xx_it.c **** 			usart_rxne_flag = 1;
- 506              		.loc 1 338 0
- 507 0016 0121     		mov	r1, #1
- 508 0018 094B     		ldr	r3, .L35+4
- 509 001a 1960     		str	r1, [r3]
+ 338:Src/stm32l0xx_it.c **** 			//usart_rxne_flag = 1;
  339:Src/stm32l0xx_it.c **** 
  340:Src/stm32l0xx_it.c **** 			usart_buffer[usart_buffer_index] = (char)usart_data;
- 510              		.loc 1 340 0
- 511 001c 0949     		ldr	r1, .L35+8
- 512 001e 0B68     		ldr	r3, [r1]
- 513 0020 D2B2     		uxtb	r2, r2
- 514              	.LVL10:
- 515 0022 0948     		ldr	r0, .L35+12
- 516 0024 C254     		strb	r2, [r0, r3]
+ 506              		.loc 1 340 0
+ 507 0016 0949     		ldr	r1, .L35+4
+ 508 0018 0B68     		ldr	r3, [r1]
+ 509 001a D2B2     		uxtb	r2, r2
+ 510              	.LVL10:
+ 511 001c 0848     		ldr	r0, .L35+8
+ 512 001e C254     		strb	r2, [r0, r3]
  341:Src/stm32l0xx_it.c **** 			usart_buffer_index++;
- 517              		.loc 1 341 0
- 518 0026 0133     		add	r3, r3, #1
- 519 0028 0B60     		str	r3, [r1]
+ 513              		.loc 1 341 0
+ 514 0020 0133     		add	r3, r3, #1
+ 515 0022 0B60     		str	r3, [r1]
  342:Src/stm32l0xx_it.c **** 
  343:Src/stm32l0xx_it.c **** 			if((char)usart_data == '\n')
- 520              		.loc 1 343 0
- 521 002a 0A2A     		cmp	r2, #10
- 522 002c 04D1     		bne	.L33
+ 516              		.loc 1 343 0
+ 517 0024 0A2A     		cmp	r2, #10
+ 518 0026 06D1     		bne	.L33
  344:Src/stm32l0xx_it.c **** 			{
  345:Src/stm32l0xx_it.c **** 
  346:Src/stm32l0xx_it.c **** 				usart_buffer[usart_buffer_index] = 0;
- 523              		.loc 1 346 0
- 524 002e 0021     		mov	r1, #0
- 525 0030 C154     		strb	r1, [r0, r3]
+ 519              		.loc 1 346 0
+ 520 0028 0022     		mov	r2, #0
+ 521 002a C254     		strb	r2, [r0, r3]
  347:Src/stm32l0xx_it.c **** 				usart_string_received_flag = 1;
- 526              		.loc 1 347 0
- 527 0032 0122     		mov	r2, #1
-ARM GAS  /tmp/ccIxLtvw.s 			page 16
+ 522              		.loc 1 347 0
+ 523 002c 0121     		mov	r1, #1
+ 524 002e 054B     		ldr	r3, .L35+12
+ 525 0030 1960     		str	r1, [r3]
+ 348:Src/stm32l0xx_it.c **** 				usart_buffer_index = 0;
+ 526              		.loc 1 348 0
+ARM GAS  /tmp/ccZtQaYQ.s 			page 16
 
 
- 528 0034 054B     		ldr	r3, .L35+16
- 529 0036 1A60     		str	r2, [r3]
- 530              	.L33:
- 348:Src/stm32l0xx_it.c **** 
- 349:Src/stm32l0xx_it.c **** 			}
- 350:Src/stm32l0xx_it.c ****     	}
- 351:Src/stm32l0xx_it.c ****   }  
- 352:Src/stm32l0xx_it.c **** }
- 531              		.loc 1 352 0
- 532              		@ sp needed
- 533 0038 7047     		bx	lr
- 534              	.L36:
- 535 003a C046     		.align	2
- 536              	.L35:
- 537 003c 00380140 		.word	1073821696
- 538 0040 00000000 		.word	usart_rxne_flag
- 539 0044 00000000 		.word	usart_buffer_index
- 540 0048 00000000 		.word	usart_buffer
- 541 004c 00000000 		.word	usart_string_received_flag
- 542              		.cfi_endproc
- 543              	.LFE45:
- 545              		.text
- 546              	.Letext0:
- 547              		.file 2 "/usr/include/newlib/machine/_default_types.h"
- 548              		.file 3 "/usr/include/newlib/sys/_stdint.h"
- 549              		.file 4 "Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l051xx.h"
- 550              		.file 5 "Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h"
- 551              		.file 6 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h"
- 552              		.file 7 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h"
- 553              		.file 8 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h"
- 554              		.file 9 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h"
- 555              		.file 10 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h"
-ARM GAS  /tmp/ccIxLtvw.s 			page 17
+ 527 0032 024B     		ldr	r3, .L35+4
+ 528 0034 1A60     		str	r2, [r3]
+ 529              	.L33:
+ 349:Src/stm32l0xx_it.c **** 
+ 350:Src/stm32l0xx_it.c **** 			}
+ 351:Src/stm32l0xx_it.c ****     	}
+ 352:Src/stm32l0xx_it.c ****   }  
+ 353:Src/stm32l0xx_it.c **** }
+ 530              		.loc 1 353 0
+ 531              		@ sp needed
+ 532 0036 7047     		bx	lr
+ 533              	.L36:
+ 534              		.align	2
+ 535              	.L35:
+ 536 0038 00380140 		.word	1073821696
+ 537 003c 00000000 		.word	usart_buffer_index
+ 538 0040 00000000 		.word	usart_buffer
+ 539 0044 00000000 		.word	usart_string_received_flag
+ 540              		.cfi_endproc
+ 541              	.LFE45:
+ 543              		.text
+ 544              	.Letext0:
+ 545              		.file 2 "/usr/include/newlib/machine/_default_types.h"
+ 546              		.file 3 "/usr/include/newlib/sys/_stdint.h"
+ 547              		.file 4 "Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l051xx.h"
+ 548              		.file 5 "Drivers/CMSIS/Device/ST/STM32L0xx/Include/stm32l0xx.h"
+ 549              		.file 6 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_def.h"
+ 550              		.file 7 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h"
+ 551              		.file 8 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_tim.h"
+ 552              		.file 9 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal.h"
+ 553              		.file 10 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_cortex.h"
+ARM GAS  /tmp/ccZtQaYQ.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l0xx_it.c
-     /tmp/ccIxLtvw.s:18     .text.NMI_Handler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:23     .text.NMI_Handler:0000000000000000 NMI_Handler
-     /tmp/ccIxLtvw.s:35     .text.HardFault_Handler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:40     .text.HardFault_Handler:0000000000000000 HardFault_Handler
-     /tmp/ccIxLtvw.s:51     .text.SVC_Handler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:56     .text.SVC_Handler:0000000000000000 SVC_Handler
-     /tmp/ccIxLtvw.s:67     .text.PendSV_Handler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:72     .text.PendSV_Handler:0000000000000000 PendSV_Handler
-     /tmp/ccIxLtvw.s:83     .text.SysTick_Handler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:88     .text.SysTick_Handler:0000000000000000 SysTick_Handler
-     /tmp/ccIxLtvw.s:110    .text.TIM2_IRQHandler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:115    .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
-     /tmp/ccIxLtvw.s:134    .text.TIM2_IRQHandler:000000000000000c $d
-     /tmp/ccIxLtvw.s:139    .text.TIM6_IRQHandler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:144    .text.TIM6_IRQHandler:0000000000000000 TIM6_IRQHandler
-     /tmp/ccIxLtvw.s:163    .text.TIM6_IRQHandler:000000000000000c $d
-     /tmp/ccIxLtvw.s:168    .text.TIM21_IRQHandler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:173    .text.TIM21_IRQHandler:0000000000000000 TIM21_IRQHandler
-     /tmp/ccIxLtvw.s:431    .text.TIM21_IRQHandler:0000000000000178 $d
-     /tmp/ccIxLtvw.s:450    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
-     /tmp/ccIxLtvw.s:455    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000000 __HAL_TIM_PeriodElapsedCallback
-     /tmp/ccIxLtvw.s:470    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000008 $d
-     /tmp/ccIxLtvw.s:475    .text.USART1_IRQHandler:0000000000000000 $t
-     /tmp/ccIxLtvw.s:480    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
-     /tmp/ccIxLtvw.s:537    .text.USART1_IRQHandler:000000000000003c $d
+     /tmp/ccZtQaYQ.s:18     .text.NMI_Handler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:23     .text.NMI_Handler:0000000000000000 NMI_Handler
+     /tmp/ccZtQaYQ.s:35     .text.HardFault_Handler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:40     .text.HardFault_Handler:0000000000000000 HardFault_Handler
+     /tmp/ccZtQaYQ.s:51     .text.SVC_Handler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:56     .text.SVC_Handler:0000000000000000 SVC_Handler
+     /tmp/ccZtQaYQ.s:67     .text.PendSV_Handler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:72     .text.PendSV_Handler:0000000000000000 PendSV_Handler
+     /tmp/ccZtQaYQ.s:83     .text.SysTick_Handler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:88     .text.SysTick_Handler:0000000000000000 SysTick_Handler
+     /tmp/ccZtQaYQ.s:110    .text.TIM2_IRQHandler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:115    .text.TIM2_IRQHandler:0000000000000000 TIM2_IRQHandler
+     /tmp/ccZtQaYQ.s:134    .text.TIM2_IRQHandler:000000000000000c $d
+     /tmp/ccZtQaYQ.s:139    .text.TIM6_IRQHandler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:144    .text.TIM6_IRQHandler:0000000000000000 TIM6_IRQHandler
+     /tmp/ccZtQaYQ.s:163    .text.TIM6_IRQHandler:000000000000000c $d
+     /tmp/ccZtQaYQ.s:168    .text.TIM21_IRQHandler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:173    .text.TIM21_IRQHandler:0000000000000000 TIM21_IRQHandler
+     /tmp/ccZtQaYQ.s:431    .text.TIM21_IRQHandler:0000000000000178 $d
+     /tmp/ccZtQaYQ.s:450    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:455    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000000 __HAL_TIM_PeriodElapsedCallback
+     /tmp/ccZtQaYQ.s:470    .text.__HAL_TIM_PeriodElapsedCallback:0000000000000008 $d
+     /tmp/ccZtQaYQ.s:475    .text.USART1_IRQHandler:0000000000000000 $t
+     /tmp/ccZtQaYQ.s:480    .text.USART1_IRQHandler:0000000000000000 USART1_IRQHandler
+     /tmp/ccZtQaYQ.s:536    .text.USART1_IRQHandler:0000000000000038 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS
@@ -986,7 +985,6 @@ DELAY_LENGTH
 chock_length_counter
 CHOCK_LENGTH
 usec_timer_flag
-usart_rxne_flag
 usart_buffer_index
 usart_buffer
 usart_string_received_flag

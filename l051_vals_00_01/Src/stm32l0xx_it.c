@@ -335,7 +335,7 @@ void USART1_IRQHandler(void)
       		//UART_Receive_IT(huart);
       		//return;
     		usart_data = (uint16_t) USART1->RDR;
-			usart_rxne_flag = 1;
+			//usart_rxne_flag = 1;
 
 			usart_buffer[usart_buffer_index] = (char)usart_data;
 			usart_buffer_index++;
@@ -345,6 +345,7 @@ void USART1_IRQHandler(void)
 
 				usart_buffer[usart_buffer_index] = 0;
 				usart_string_received_flag = 1;
+				usart_buffer_index = 0;
 
 			}
     	}

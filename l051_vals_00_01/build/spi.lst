@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQuYMVF.s 			page 1
+ARM GAS  /tmp/ccrVpoRX.s 			page 1
 
 
    1              		.cpu cortex-m0plus
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccQuYMVF.s 			page 1
   31:Src/spi.c     ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
   32:Src/spi.c     ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
   33:Src/spi.c     ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-ARM GAS  /tmp/ccQuYMVF.s 			page 2
+ARM GAS  /tmp/ccrVpoRX.s 			page 2
 
 
   34:Src/spi.c     ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccQuYMVF.s 			page 1
   52 001a 9200     		lsl	r2, r2, #2
   53 001c 8261     		str	r2, [r0, #24]
   62:Src/spi.c     ****   hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
-ARM GAS  /tmp/ccQuYMVF.s 			page 3
+ARM GAS  /tmp/ccrVpoRX.s 			page 3
 
 
   54              		.loc 1 62 0
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccQuYMVF.s 			page 1
   75:Src/spi.c     **** {
   98              		.loc 1 75 0
   99              		.cfi_startproc
-ARM GAS  /tmp/ccQuYMVF.s 			page 4
+ARM GAS  /tmp/ccrVpoRX.s 			page 4
 
 
  100              	.LVL2:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccQuYMVF.s 			page 1
  135 0026 0326     		mov	r6, #3
  136 0028 0496     		str	r6, [sp, #16]
   95:Src/spi.c     ****     GPIO_InitStruct.Alternate = GPIO_AF5_SPI2;
-ARM GAS  /tmp/ccQuYMVF.s 			page 5
+ARM GAS  /tmp/ccrVpoRX.s 			page 5
 
 
  137              		.loc 1 95 0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccQuYMVF.s 			page 1
  178              		.section	.text.HAL_SPI_MspDeInit,"ax",%progbits
  179              		.align	2
  180              		.global	HAL_SPI_MspDeInit
-ARM GAS  /tmp/ccQuYMVF.s 			page 6
+ARM GAS  /tmp/ccrVpoRX.s 			page 6
 
 
  181              		.code	16
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccQuYMVF.s 			page 1
  133:Src/spi.c     **** } 
  213              		.loc 1 133 0
  214              		@ sp needed
-ARM GAS  /tmp/ccQuYMVF.s 			page 7
+ARM GAS  /tmp/ccrVpoRX.s 			page 7
 
 
  215 001e 08BD     		pop	{r3, pc}
@@ -388,22 +388,22 @@ ARM GAS  /tmp/ccQuYMVF.s 			page 1
  238              		.file 7 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_dma.h"
  239              		.file 8 "Drivers/STM32L0xx_HAL_Driver/Inc/stm32l0xx_hal_spi.h"
  240              		.file 9 "Inc/spi.h"
-ARM GAS  /tmp/ccQuYMVF.s 			page 8
+ARM GAS  /tmp/ccrVpoRX.s 			page 8
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 spi.c
-     /tmp/ccQuYMVF.s:18     .text.MX_SPI2_Init:0000000000000000 $t
-     /tmp/ccQuYMVF.s:23     .text.MX_SPI2_Init:0000000000000000 MX_SPI2_Init
-     /tmp/ccQuYMVF.s:84     .text.MX_SPI2_Init:0000000000000040 $d
+     /tmp/ccrVpoRX.s:18     .text.MX_SPI2_Init:0000000000000000 $t
+     /tmp/ccrVpoRX.s:23     .text.MX_SPI2_Init:0000000000000000 MX_SPI2_Init
+     /tmp/ccrVpoRX.s:84     .text.MX_SPI2_Init:0000000000000040 $d
                             *COM*:0000000000000058 hspi2
-     /tmp/ccQuYMVF.s:91     .text.HAL_SPI_MspInit:0000000000000000 $t
-     /tmp/ccQuYMVF.s:96     .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
-     /tmp/ccQuYMVF.s:172    .text.HAL_SPI_MspInit:0000000000000054 $d
-     /tmp/ccQuYMVF.s:179    .text.HAL_SPI_MspDeInit:0000000000000000 $t
-     /tmp/ccQuYMVF.s:184    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
-     /tmp/ccQuYMVF.s:219    .text.HAL_SPI_MspDeInit:0000000000000020 $d
-     /tmp/ccQuYMVF.s:228    .rodata.str1.4:0000000000000000 $d
+     /tmp/ccrVpoRX.s:91     .text.HAL_SPI_MspInit:0000000000000000 $t
+     /tmp/ccrVpoRX.s:96     .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
+     /tmp/ccrVpoRX.s:172    .text.HAL_SPI_MspInit:0000000000000054 $d
+     /tmp/ccrVpoRX.s:179    .text.HAL_SPI_MspDeInit:0000000000000000 $t
+     /tmp/ccrVpoRX.s:184    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
+     /tmp/ccrVpoRX.s:219    .text.HAL_SPI_MspDeInit:0000000000000020 $d
+     /tmp/ccrVpoRX.s:228    .rodata.str1.4:0000000000000000 $d
                      .debug_frame:0000000000000010 $d
 
 UNDEFINED SYMBOLS

@@ -173,35 +173,125 @@ int main(void)
 		//if(usart_rxne_flag)
 
 
-		if(usart_string_received_flag)
+
+
+		if(usart_string_received_flag)                                                                                 
 		{
 			int on_off_flag = 0;
 			int channel = 1;
 			int aux;
 
-			sscanf(usart_buffer, "e%1dc%2dk%3dl%4dd%2dn%4dp%5dm%3d\r\n",
-			       &on_off_flag, &channel, &NUMBER_OF_CHARGE_PULSES, &DISCARGE_IMPULSE_LENGTH,
-				   &DELAY_LENGTH, &CHOCK_LENGTH, &aux, &aux);
-			DISCARGE_IMPULSE_LENGTH = DISCARGE_IMPULSE_LENGTH/20 + 1;
 			usart_string_received_flag = 0;
-			usart_buffer_index = 0;
 
-			if(on_off_flag)
+			if(usart_buffer[0] == 'e')
 			{
-				// start generator
-    			MX_TIM21_Init();
-				HAL_TIM_Base_Start(&htim21);
 
-				automat_state = 1;
-				chock_length_counter = 0;
-				// enable tim21 interrupt
-    			TIM21->DIER |= TIM_DIER_UIE;
+				sscanf(usart_buffer, "e%1dc%2dk%3dl%4dd%2dn%4dp%5dm%3d\r\n",                                                   	
+			           &on_off_flag, &channel, &NUMBER_OF_CHARGE_PULSES, &DISCARGE_IMPULSE_LENGTH,
+			    	   &DELAY_LENGTH, &CHOCK_LENGTH, &aux, &aux);
+			    DISCARGE_IMPULSE_LENGTH = DISCARGE_IMPULSE_LENGTH/20 + 1;
+			    usart_buffer_index = 0;
+                                                                                                                               
+			    uint8_t channel_address = channel;
+                                                                                                                               
+			    if(on_off_flag)
+			    {
+			    	// set address
+			    	/*
+			    	if(channel == 0)
+			    	{
+  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin|addr1_out_Pin|addr2_out_Pin 
+                              |addr3_out_Pin, GPIO_PIN_RESET);
+			    		
+			    	}
+			    	else if(channel == 1)
+			    	{
+  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin|addr1_out_Pin|addr2_out_Pin 
+                              |addr3_out_Pin, GPIO_PIN_RESET);
+  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin, GPIO_PIN_SET);
+			    		
+			    	}
+			    	else if(channel == 2)
+			    	{
+  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin|addr1_out_Pin|addr2_out_Pin 
+                              |addr3_out_Pin, GPIO_PIN_RESET);
+  			    		HAL_GPIO_WritePin(GPIOB, addr1_out_Pin, GPIO_PIN_SET);
+			    		
+			    	}
+			    	*/
+                                                                                                                               
+			    	uint8_t addr0, addr1, addr2, addr3;
+                                                                                                                               
+			    	addr0 = channel_address & 0x01;
+			    	addr1 = (channel_address & 0x02) >> 1;
+			    	addr2 = (channel_address & 0x04) >> 2;
+			    	addr3 = (channel_address & 0x08) >> 3;
+  			    	
+			    	HAL_GPIO_WritePin(GPIOB, addr0_out_Pin|addr1_out_Pin|addr2_out_Pin 
+                                            |addr3_out_Pin, GPIO_PIN_RESET);
+                                                                                                                               
+			    	if(addr0)
+  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin, GPIO_PIN_SET);
+			    	if(addr1)
+  			    		HAL_GPIO_WritePin(GPIOB, addr1_out_Pin, GPIO_PIN_SET);
+			    	if(addr2)
+  			    		HAL_GPIO_WritePin(GPIOB, addr2_out_Pin, GPIO_PIN_SET);
+			    	if(addr3)
+  			    		HAL_GPIO_WritePin(GPIOB, addr3_out_Pin, GPIO_PIN_SET);
+                                                                                                                               
+			    	// start generator
+    		    	MX_TIM21_Init();
+			    	HAL_TIM_Base_Start(&htim21);
+                                                                                                                               
+			    	automat_state = 1;
+			    	chock_length_counter = 0;
+			    	// enable tim21 interrupt
+    		    	TIM21->DIER |= TIM_DIER_UIE;
+			    }// end if(on_off_flag)
+
 			}
-		}
+			else if(usart_buffer[0] == 'v')
+			{
+
+			    int NUMBER_OF_PULSES = 1; 
+				int LENGTH_OF_PULSE = 1;
+				sscanf(usart_buffer, "v%1dc%2dn%3dl%5dd%5d\r\n", //   v1c00n001l00001d00003\r\n                             	
+			           &on_off_flag, &channel, &NUMBER_OF_PULSES, &LENGTH_OF_PULSE, &DELAY_LENGTH);
+
+				//debug
+				strcpy(usart_buffer, "");
+
+			    if(on_off_flag)
+			    {
+
+					// Enable SysTick Interrupt
+					SysTick->CTRL |= SysTick_CTRL_TICKINT_Msk;
+
+					int i;
+					for(i=0; i<NUMBER_OF_PULSES; i++)
+					{
+						// turn on vibrator
+  			    		HAL_GPIO_WritePin(GPIOA, aux_out_Pin, GPIO_PIN_SET);
+  						HAL_Delay(LENGTH_OF_PULSE);
+						// turn off vibrator
+  			    		HAL_GPIO_WritePin(GPIOA, aux_out_Pin, GPIO_PIN_RESET);
+  						
+						//delay
+						HAL_Delay(DELAY_LENGTH);
+
+					}
+
+					// Disable SysTick Interrupt 
+					SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
+				}
+			}
+
+
+		}// end if(usart_string_received_flag)
 
 
 
-    }
+    }// end while (1)
 
 }
 
