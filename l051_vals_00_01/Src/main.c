@@ -56,7 +56,10 @@ int DELAY_1_MS = 50;
 int NUMBER_OF_CHARGE_PULSES = 8;
 int DELAY_LENGTH = 11;
 int CHOCK_LENGTH = 10;
-int DISCARGE_IMPULSE_LENGTH = 11;
+int DISCHARGE_IMPULSE_LENGTH = 11;
+int FORM = 0;
+double INCREMENT = 0;
+double MODIFIED_NUMBER_OF_CHARGE_PULSES = 0;
 
 int usec_timer_flag = 0;
 
@@ -140,7 +143,8 @@ int main(void)
 	HAL_TIM_Base_Start(&htim21);
     TIM21->DIER |= TIM_DIER_UIE;
 
-	sprintf(message, "t");
+	// debug
+	strcpy(usart_buffer, "e1c00k005l0160d00n0003p00000m000f0\r\n");
 
 	automat_state = 1;
     /* Infinite loop */
@@ -173,23 +177,26 @@ int main(void)
 		//if(usart_rxne_flag)
 
 
-
+		// debug
+		usart_string_received_flag = 1;
 
 		if(usart_string_received_flag)                                                                                 
 		{
 			int on_off_flag = 0;
 			int channel = 1;
 			int aux;
+			// FORM 0 - flat, 1 - ascend, 2 - triangle
 
 			usart_string_received_flag = 0;
+
 
 			if(usart_buffer[0] == 'e')
 			{
 
-				sscanf(usart_buffer, "e%1dc%2dk%3dl%4dd%2dn%4dp%5dm%3d\r\n",                                                   	
-			           &on_off_flag, &channel, &NUMBER_OF_CHARGE_PULSES, &DISCARGE_IMPULSE_LENGTH,
-			    	   &DELAY_LENGTH, &CHOCK_LENGTH, &aux, &aux);
-			    DISCARGE_IMPULSE_LENGTH = DISCARGE_IMPULSE_LENGTH/20 + 1;
+				sscanf(usart_buffer, "e%1dc%2dk%3dl%4dd%2dn%4dp%5dm%3df%1d\r\n",                                                   	
+			           &on_off_flag, &channel, &NUMBER_OF_CHARGE_PULSES, &DISCHARGE_IMPULSE_LENGTH,
+			    	   &DELAY_LENGTH, &CHOCK_LENGTH, &aux, &aux, &FORM);
+			    DISCHARGE_IMPULSE_LENGTH = DISCHARGE_IMPULSE_LENGTH/20 + 1;
 			    usart_buffer_index = 0;
                                                                                                                                
 			    uint8_t channel_address = channel;
@@ -238,7 +245,14 @@ int main(void)
   			    		HAL_GPIO_WritePin(GPIOB, addr2_out_Pin, GPIO_PIN_SET);
 			    	if(addr3)
   			    		HAL_GPIO_WritePin(GPIOB, addr3_out_Pin, GPIO_PIN_SET);
-                                                                                                                               
+
+
+					// calculate waveform parameters
+					if(FORM == 1) // ascending
+						INCREMENT = (double)((double)NUMBER_OF_CHARGE_PULSES / (double)CHOCK_LENGTH);
+					else if(FORM == 2)  // triangle
+						INCREMENT = (double)((double)NUMBER_OF_CHARGE_PULSES / ((double)CHOCK_LENGTH / 2.0));
+
 			    	// start generator
     		    	MX_TIM21_Init();
 			    	HAL_TIM_Base_Start(&htim21);
@@ -258,8 +272,6 @@ int main(void)
 				sscanf(usart_buffer, "v%1dc%2dn%3dl%5dd%5d\r\n", //   v1c00n001l00001d00003\r\n                             	
 			           &on_off_flag, &channel, &NUMBER_OF_PULSES, &LENGTH_OF_PULSE, &DELAY_LENGTH);
 
-				//debug
-				strcpy(usart_buffer, "");
 
 			    if(on_off_flag)
 			    {

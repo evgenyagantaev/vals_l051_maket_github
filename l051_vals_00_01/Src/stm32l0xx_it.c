@@ -44,6 +44,7 @@ extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim21;
 
+
 /******************************************************************************/
 /*            Cortex-M0+ Processor Interruption and Exception Handlers         */ 
 /******************************************************************************/
@@ -175,9 +176,12 @@ extern uint32_t chock_length_counter;
 
 extern int DELAY_1_MS;
 extern int NUMBER_OF_CHARGE_PULSES;
+extern double MODIFIED_NUMBER_OF_CHARGE_PULSES;
 extern int DELAY_LENGTH; 
 extern int CHOCK_LENGTH;
-extern int DISCARGE_IMPULSE_LENGTH;
+extern int DISCHARGE_IMPULSE_LENGTH;
+extern double INCREMENT;
+extern int FORM;
 
 extern int usart_string_received_flag;
 
@@ -191,12 +195,26 @@ void TIM21_IRQHandler(void)
 
 	if(automat_state == 1)
 	{
+
 		if(odd_even)
 		{
+			if((charge_packet_counter == 0))
+			{
+				if((FORM == 2) && (chock_length_counter > (CHOCK_LENGTH/2)))
+					INCREMENT = -INCREMENT;
+
+				if(FORM != 0)
+				{
+					MODIFIED_NUMBER_OF_CHARGE_PULSES += INCREMENT;
+					NUMBER_OF_CHARGE_PULSES = (int)MODIFIED_NUMBER_OF_CHARGE_PULSES;
+				}
+			}
+
 			charge_packet_counter++;
 		}
 		odd_even = (odd_even + 1) % 2;
 		usec_gen_out_GPIO_Port->ODR ^= usec_gen_out_Pin;// toggle usec generator pin
+
 
 		if(charge_packet_counter >= NUMBER_OF_CHARGE_PULSES)
 		{
@@ -210,13 +228,13 @@ void TIM21_IRQHandler(void)
 		if(positive_impulse_counter == 1)
 		{
 			// set f1 pin
-    		pos_pack_gen_out_GPIO_Port->BSRR = pos_pack_gen_out_Pin ;
+    		pos_pack_gen_out_GPIO_Port->BSRR |= pos_pack_gen_out_Pin ;
             
 		}
-		if(positive_impulse_counter >= DISCARGE_IMPULSE_LENGTH)
+		if(positive_impulse_counter >= DISCHARGE_IMPULSE_LENGTH)
 		{
 			// reset f1 pin
-    		pos_pack_gen_out_GPIO_Port->BRR = pos_pack_gen_out_Pin ;
+    		pos_pack_gen_out_GPIO_Port->BRR |= pos_pack_gen_out_Pin ;
 			positive_impulse_counter = 0;
 			negative_impulse_counter = 0;
 			automat_state = 3;
@@ -233,16 +251,18 @@ void TIM21_IRQHandler(void)
 		if(negative_impulse_counter == 1)
 		{
 			// set f2 pin
-    		neg_pack_gen_out_GPIO_Port->BSRR = neg_pack_gen_out_Pin ;
+    		neg_pack_gen_out_GPIO_Port->BSRR |= neg_pack_gen_out_Pin ;
             
 		}
-		if(negative_impulse_counter >= DISCARGE_IMPULSE_LENGTH)
+		if(negative_impulse_counter >= DISCHARGE_IMPULSE_LENGTH)
 		{
 			// reset f2 pin
-    		neg_pack_gen_out_GPIO_Port->BRR = neg_pack_gen_out_Pin ;
+    		neg_pack_gen_out_GPIO_Port->BRR |= neg_pack_gen_out_Pin ;
 			negative_impulse_counter = 0;
 			discharge_counter = 0;
-			automat_state = 4;
+			//automat_state = 4;
+			//debug
+			automat_state = 5;
             
 		}
 		else
@@ -255,14 +275,14 @@ void TIM21_IRQHandler(void)
 	{
 		if(discharge_counter == 1)
 		{
-			// set f2 pin
-    		f3_out_GPIO_Port->BSRR = f3_out_Pin ;
+			// set f3 pin
+    		f3_out_GPIO_Port->BSRR |= f3_out_Pin ;
             
 		}
 		if(discharge_counter >= 11)
 		{
-			// reset f2 pin
-    		f3_out_GPIO_Port->BRR = f3_out_Pin ;
+			// reset f3 pin
+    		f3_out_GPIO_Port->BRR |= f3_out_Pin ;
 			discharge_counter = 0;
 			delay_counter = 0;
 			automat_state = 5;
@@ -298,6 +318,7 @@ void TIM21_IRQHandler(void)
 		
 		chock_length_counter = 0;
 		automat_state = 0;
+		MODIFIED_NUMBER_OF_CHARGE_PULSES = 0;
 	}
 	//*/
 
