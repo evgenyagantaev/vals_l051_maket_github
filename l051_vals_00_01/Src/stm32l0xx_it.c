@@ -200,11 +200,14 @@ void TIM21_IRQHandler(void)
 		{
 			if((charge_packet_counter == 0))
 			{
-				if((FORM == 2) && (chock_length_counter > (CHOCK_LENGTH/2)))
+				if((FORM == 2) && (MODIFIED_NUMBER_OF_CHARGE_PULSES > (CHOCK_LENGTH/2)) && (INCREMENT > 0))
 					INCREMENT = -INCREMENT;
 
-				if(FORM != 0)
+				if(FORM == 1)
 				{
+					if(MODIFIED_NUMBER_OF_CHARGE_PULSES >= CHOCK_LENGTH)
+						MODIFIED_NUMBER_OF_CHARGE_PULSES = 0;
+
 					MODIFIED_NUMBER_OF_CHARGE_PULSES += INCREMENT;
 					NUMBER_OF_CHARGE_PULSES = (int)MODIFIED_NUMBER_OF_CHARGE_PULSES;
 				}
@@ -262,7 +265,7 @@ void TIM21_IRQHandler(void)
 			discharge_counter = 0;
 			//automat_state = 4;
 			//debug
-			automat_state = 5;
+			automat_state = 1;
             
 		}
 		else
@@ -311,7 +314,8 @@ void TIM21_IRQHandler(void)
 	}
 
 	//*
-	if(chock_length_counter >= CHOCK_LENGTH)
+	//if(chock_length_counter >= CHOCK_LENGTH)
+	if(0)
 	{
 		// disable tim21 interrupt
     	TIM21->DIER &= ~TIM_DIER_UIE;
