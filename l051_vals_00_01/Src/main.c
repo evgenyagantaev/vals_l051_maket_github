@@ -54,12 +54,12 @@
 
 int DELAY_1_MS = 50;
 int NUMBER_OF_CHARGE_PULSES = 5;
-int DELAY_LENGTH = 11;
-int CHOCK_LENGTH = 16;
+int DELAY_LENGTH = 0;
+int CHOCK_LENGTH = 10;
 int DISCHARGE_IMPULSE_LENGTH = 11;
-int FORM = 2;
+int FORM = 0;
 double INCREMENT = 1;
-double MODIFIED_NUMBER_OF_CHARGE_PULSES = 0;
+double MODIFIED_NUMBER_OF_CHARGE_PULSES = 1;
 
 int usec_timer_flag = 0;
 
@@ -139,14 +139,28 @@ int main(void)
 	/* Disable SysTick Interrupt */
 	SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
 
+	// debug
+	strcpy(usart_buffer, "e1c00k005l0160d00n0005p00000m000f0\r\n");
+	FORM = 2;
+
+	if(FORM == 0)
+		automat_state = 1;
+	else if(FORM == 1)
+	{
+		automat_state = 101;
+		INCREMENT = ((double)NUMBER_OF_CHARGE_PULSES)/((double)CHOCK_LENGTH);
+	}
+	else if(FORM == 2)
+	{
+		automat_state = 102;
+		INCREMENT = ((double)NUMBER_OF_CHARGE_PULSES)/((double)CHOCK_LENGTH/2.0);
+	}
+
+
     MX_TIM21_Init();
 	HAL_TIM_Base_Start(&htim21);
     TIM21->DIER |= TIM_DIER_UIE;
 
-	// debug
-	strcpy(usart_buffer, "e1c00k005l0160d00n0005p00000m000f0\r\n");
-
-	automat_state = 1;
     /* Infinite loop */
     while (1)
     {

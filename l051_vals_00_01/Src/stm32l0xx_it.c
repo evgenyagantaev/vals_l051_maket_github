@@ -198,21 +198,6 @@ void TIM21_IRQHandler(void)
 
 		if(odd_even)
 		{
-			if((charge_packet_counter == 0))
-			{
-				if((FORM == 2) && (MODIFIED_NUMBER_OF_CHARGE_PULSES > (CHOCK_LENGTH/2)) && (INCREMENT > 0))
-					INCREMENT = -INCREMENT;
-
-				if(FORM == 1)
-				{
-					if(MODIFIED_NUMBER_OF_CHARGE_PULSES >= CHOCK_LENGTH)
-						MODIFIED_NUMBER_OF_CHARGE_PULSES = 0;
-
-					MODIFIED_NUMBER_OF_CHARGE_PULSES += INCREMENT;
-					NUMBER_OF_CHARGE_PULSES = (int)MODIFIED_NUMBER_OF_CHARGE_PULSES;
-				}
-			}
-
 			charge_packet_counter++;
 		}
 		odd_even = (odd_even + 1) % 2;
@@ -220,6 +205,42 @@ void TIM21_IRQHandler(void)
 
 
 		if(charge_packet_counter >= NUMBER_OF_CHARGE_PULSES)
+		{
+			charge_packet_counter = 0;
+			automat_state = 2;
+			positive_impulse_counter = 0;
+		}
+	}
+	else if(automat_state == 101)   // form == 1 piloobraznyj impuls
+	{
+
+		if(odd_even)
+		{
+			charge_packet_counter++;
+		}
+		odd_even = (odd_even + 1) % 2;
+		usec_gen_out_GPIO_Port->ODR ^= usec_gen_out_Pin;// toggle usec generator pin
+
+
+		if(charge_packet_counter >= MODIFIED_NUMBER_OF_CHARGE_PULSES)
+		{
+			charge_packet_counter = 0;
+			automat_state = 2;
+			positive_impulse_counter = 0;
+		}
+	}
+	else if(automat_state == 102)   // form == 2 treugolnyj impuls
+	{
+
+		if(odd_even)
+		{
+			charge_packet_counter++;
+		}
+		odd_even = (odd_even + 1) % 2;
+		usec_gen_out_GPIO_Port->ODR ^= usec_gen_out_Pin;// toggle usec generator pin
+
+
+		if(charge_packet_counter >= MODIFIED_NUMBER_OF_CHARGE_PULSES)
 		{
 			charge_packet_counter = 0;
 			automat_state = 2;
@@ -263,9 +284,7 @@ void TIM21_IRQHandler(void)
     		neg_pack_gen_out_GPIO_Port->BRR |= neg_pack_gen_out_Pin ;
 			negative_impulse_counter = 0;
 			discharge_counter = 0;
-			//automat_state = 4;
-			//debug
-			automat_state = 1;
+			automat_state = 4;
             
 		}
 		else
@@ -289,7 +308,6 @@ void TIM21_IRQHandler(void)
 			discharge_counter = 0;
 			delay_counter = 0;
 			automat_state = 5;
-            
 		}
 		else
 		{
@@ -302,8 +320,25 @@ void TIM21_IRQHandler(void)
 		if(delay_counter >= (DELAY_1_MS*DELAY_LENGTH))
 		{
 			delay_counter = 0;
-			automat_state = 1;
 			chock_length_counter++;
+
+			if(FORM == 0)
+				automat_state = 1;
+			else if(FORM == 1)
+			{
+				automat_state = 101;
+				MODIFIED_NUMBER_OF_CHARGE_PULSES += INCREMENT;
+			}
+			else if(FORM == 2)
+			{
+				automat_state = 102;
+				MODIFIED_NUMBER_OF_CHARGE_PULSES += INCREMENT;
+				if(MODIFIED_NUMBER_OF_CHARGE_PULSES < 1)
+					MODIFIED_NUMBER_OF_CHARGE_PULSES = 1;
+
+				if((chock_length_counter >= (CHOCK_LENGTH/2)) && (INCREMENT > 0))
+					INCREMENT = - INCREMENT;
+			}
             
 		}
 		else
@@ -314,15 +349,30 @@ void TIM21_IRQHandler(void)
 	}
 
 	//*
-	//if(chock_length_counter >= CHOCK_LENGTH)
-	if(0)
+	if(chock_length_counter >= CHOCK_LENGTH)
 	{
 		// disable tim21 interrupt
     	TIM21->DIER &= ~TIM_DIER_UIE;
 		
+  		HAL_GPIO_WritePin(GPIOA, usec_gen_out_Pin, GPIO_PIN_RESET);
 		chock_length_counter = 0;
 		automat_state = 0;
-		MODIFIED_NUMBER_OF_CHARGE_PULSES = 0;
+		odd_even = 0;
+		MODIFIED_NUMBER_OF_CHARGE_PULSES = 1;
+
+		//debug
+		//********************************
+    	TIM21->DIER |= TIM_DIER_UIE;   // enable tim21 interrupt
+		if(FORM == 0)
+			automat_state = 1;
+		else if(FORM == 1)
+		{
+			automat_state = 101;
+		}
+		else if(FORM == 2)
+		{
+			automat_state = 102;
+		}
 	}
 	//*/
 
