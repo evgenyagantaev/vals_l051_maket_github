@@ -52,10 +52,13 @@
 
 /* Private variables ---------------------------------------------------------*/
 
+int aux;
+int on_off_flag = 0;
+int channel = 1;
 int DELAY_1_MS = 50;
-int NUMBER_OF_CHARGE_PULSES = 5;
-int DELAY_LENGTH = 0;
-int CHOCK_LENGTH = 10;
+int NUMBER_OF_CHARGE_PULSES = 7;
+int DELAY_LENGTH = 5;
+int CHOCK_LENGTH = 11;
 int DISCHARGE_IMPULSE_LENGTH = 11;
 int FORM = 0;
 double INCREMENT = 1;
@@ -131,6 +134,7 @@ int main(void)
   	ssd1306_UpdateScreen();
   	HAL_Delay(100);
 
+    MX_TIM21_Init();
 
 
 	
@@ -139,9 +143,13 @@ int main(void)
 	/* Disable SysTick Interrupt */
 	SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
 
-	// debug
-	strcpy(usart_buffer, "e1c00k005l0160d00n0005p00000m000f0\r\n");
-	FORM = 2;
+	// debug *****************************
+	//*
+	strcpy(usart_buffer, "e1c00k005l0200d03n0080p00000m000f0\r\n");
+	sscanf(usart_buffer, "e%1dc%2dk%3dl%4dd%2dn%4dp%5dm%3df%1d\r\n",                                                   	
+			&on_off_flag, &channel, &NUMBER_OF_CHARGE_PULSES, &DISCHARGE_IMPULSE_LENGTH,
+			&DELAY_LENGTH, &CHOCK_LENGTH, &aux, &aux, &FORM);
+	DISCHARGE_IMPULSE_LENGTH = DISCHARGE_IMPULSE_LENGTH/20 + 1;
 
 	if(FORM == 0)
 		automat_state = 1;
@@ -157,9 +165,9 @@ int main(void)
 	}
 
 
-    MX_TIM21_Init();
-	HAL_TIM_Base_Start(&htim21);
     TIM21->DIER |= TIM_DIER_UIE;
+	HAL_TIM_Base_Start(&htim21);
+	//*/
 
     /* Infinite loop */
     while (1)
@@ -196,9 +204,6 @@ int main(void)
 
 		if(usart_string_received_flag)                                                                                 
 		{
-			int on_off_flag = 0;
-			int channel = 1;
-			int aux;
 			// FORM 0 - flat, 1 - ascend, 2 - triangle
 
 			usart_string_received_flag = 0;
@@ -217,29 +222,6 @@ int main(void)
                                                                                                                                
 			    if(on_off_flag)
 			    {
-			    	// set address
-			    	/*
-			    	if(channel == 0)
-			    	{
-  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin|addr1_out_Pin|addr2_out_Pin 
-                              |addr3_out_Pin, GPIO_PIN_RESET);
-			    		
-			    	}
-			    	else if(channel == 1)
-			    	{
-  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin|addr1_out_Pin|addr2_out_Pin 
-                              |addr3_out_Pin, GPIO_PIN_RESET);
-  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin, GPIO_PIN_SET);
-			    		
-			    	}
-			    	else if(channel == 2)
-			    	{
-  			    		HAL_GPIO_WritePin(GPIOB, addr0_out_Pin|addr1_out_Pin|addr2_out_Pin 
-                              |addr3_out_Pin, GPIO_PIN_RESET);
-  			    		HAL_GPIO_WritePin(GPIOB, addr1_out_Pin, GPIO_PIN_SET);
-			    		
-			    	}
-			    	*/
                                                                                                                                
 			    	uint8_t addr0, addr1, addr2, addr3;
                                                                                                                                
@@ -261,20 +243,20 @@ int main(void)
   			    		HAL_GPIO_WritePin(GPIOB, addr3_out_Pin, GPIO_PIN_SET);
 
 
-					// calculate waveform parameters
-					if(FORM == 1) // ascending
-						INCREMENT = (double)((double)NUMBER_OF_CHARGE_PULSES / (double)CHOCK_LENGTH);
-					else if(FORM == 2)  // triangle
-						INCREMENT = (double)((double)NUMBER_OF_CHARGE_PULSES / ((double)CHOCK_LENGTH / 2.0));
-
-			    	// start generator
-    		    	MX_TIM21_Init();
-			    	HAL_TIM_Base_Start(&htim21);
-                                                                                                                               
-			    	automat_state = 1;
-			    	chock_length_counter = 0;
-			    	// enable tim21 interrupt
-    		    	TIM21->DIER |= TIM_DIER_UIE;
+					if(FORM == 0)
+						automat_state = 1;
+					else if(FORM == 1)
+					{
+						automat_state = 101;
+						INCREMENT = ((double)NUMBER_OF_CHARGE_PULSES)/((double)CHOCK_LENGTH);
+					}
+					else if(FORM == 2)
+					{
+						automat_state = 102;
+						INCREMENT = ((double)NUMBER_OF_CHARGE_PULSES)/((double)CHOCK_LENGTH/2.0);
+					}
+    				TIM21->DIER |= TIM_DIER_UIE;
+					HAL_TIM_Base_Start(&htim21);
 			    }// end if(on_off_flag)
 
 			}

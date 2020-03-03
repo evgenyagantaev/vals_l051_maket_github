@@ -349,8 +349,10 @@ void TIM21_IRQHandler(void)
 	}
 
 	//*
-	if(chock_length_counter >= CHOCK_LENGTH)
+	if(chock_length_counter >= CHOCK_LENGTH)   // otrabotali paket impulsov
 	{
+		// stop tim21
+		HAL_TIM_Base_Stop(&htim21);
 		// disable tim21 interrupt
     	TIM21->DIER &= ~TIM_DIER_UIE;
 		
@@ -362,7 +364,9 @@ void TIM21_IRQHandler(void)
 
 		//debug
 		//********************************
-    	TIM21->DIER |= TIM_DIER_UIE;   // enable tim21 interrupt
+		//*
+		if(INCREMENT < 0)
+			INCREMENT = - INCREMENT;
 		if(FORM == 0)
 			automat_state = 1;
 		else if(FORM == 1)
@@ -373,6 +377,9 @@ void TIM21_IRQHandler(void)
 		{
 			automat_state = 102;
 		}
+    	TIM21->DIER |= TIM_DIER_UIE;   // enable tim21 interrupt
+		HAL_TIM_Base_Start(&htim21);
+		//*/
 	}
 	//*/
 
