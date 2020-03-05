@@ -53,6 +53,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 int aux;
+int chok_in_progress = 0;
 int on_off_flag = 0;
 int channel = 1;
 int DELAY_1_MS = 50;
@@ -143,8 +144,10 @@ int main(void)
 	/* Disable SysTick Interrupt */
 	SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
 
+	// debug
+	//strcpy(usart_buffer, "e1c00k020l0200d5n0180p00000m000f2\r\n");
 	// debug *****************************
-	//*
+	/*
 	strcpy(usart_buffer, "e1c00k005l0200d03n0080p00000m000f0\r\n");
 	sscanf(usart_buffer, "e%1dc%2dk%3dl%4dd%2dn%4dp%5dm%3df%1d\r\n",                                                   	
 			&on_off_flag, &channel, &NUMBER_OF_CHARGE_PULSES, &DISCHARGE_IMPULSE_LENGTH,
@@ -172,35 +175,9 @@ int main(void)
     /* Infinite loop */
     while (1)
     {
-		// Disable SysTick Interrupt 
-		//SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
-		// enable tim21 interrupt
-    	//TIM21->DIER |= TIM_DIER_UIE;
-
-		//while(automat_state != 0);
-
-		// disable tim21 interrupt
-    	//TIM21->DIER &= ~TIM_DIER_UIE;
-		// Enable SysTick Interrupt
-		//SysTick->CTRL = SysTick_CTRL_TICKINT_Msk;
-  		//HAL_Delay(11);
-		//automat_state = 1;
-
-		// toggle gpio
-  		//usec_gen_out_GPIO_Port->ODR ^= usec_gen_out_Pin;// toggle usec generator pin
-
-    	//USART1->CR1 |= USART_CR1_RXNEIE;
-    	//USART1->CR1 &= ~USART_CR1_RXNEIE;
-
-		//while(((USART1->ISR) & UART_FLAG_RXNE) == RESET);
-		//HAL_UART_Transmit(&huart1, message, strlen((const char *)message), 500);
-		//*
-		//if(automat_state == 0)
-		//if(usart_rxne_flag)
-
 
 		// debug
-		usart_string_received_flag = 0;
+		//usart_string_received_flag = 1;
 
 		if(usart_string_received_flag)                                                                                 
 		{
@@ -255,8 +232,14 @@ int main(void)
 						automat_state = 102;
 						INCREMENT = ((double)NUMBER_OF_CHARGE_PULSES)/((double)CHOCK_LENGTH/2.0);
 					}
+
+					chok_in_progress = 1;
     				TIM21->DIER |= TIM_DIER_UIE;
 					HAL_TIM_Base_Start(&htim21);
+
+					while(chok_in_progress);
+
+
 			    }// end if(on_off_flag)
 
 			}

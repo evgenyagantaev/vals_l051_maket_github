@@ -172,6 +172,7 @@ extern int discharge_counter;
 
 extern uint32_t delay_counter;
 extern uint32_t chock_length_counter;
+extern int chok_in_progress;
 
 
 extern int DELAY_1_MS;
@@ -362,9 +363,11 @@ void TIM21_IRQHandler(void)
 		odd_even = 0;
 		MODIFIED_NUMBER_OF_CHARGE_PULSES = 1;
 
+		chok_in_progress = 0;
+
 		//debug
 		//********************************
-		//*
+		/*
 		if(INCREMENT < 0)
 			INCREMENT = - INCREMENT;
 		if(FORM == 0)
